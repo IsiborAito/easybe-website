@@ -1,5 +1,6 @@
 import React from 'react';
 import WhyUs from "./components/whyUs";
+import Contact from "./components/contactUs";
 import { ReactLocation, Route, Router } from '@tanstack/react-location'
 import './App.css';
 
@@ -10,7 +11,11 @@ const routes: Route[] = [
     path: '',
     children: [
       {path: '/why-us',
-      element: <WhyUs/>}
+      element: <WhyUs/>},
+      {
+        path: '/contact-us',
+        element: <Contact/>
+      }
     ]
   }
 ]
