@@ -1,25 +1,79 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Shell from './components/shell/shell';
+import { ReactLocation, Route, Router } from '@tanstack/react-location'
+import Home from './components/home/home';
+
+const location = new ReactLocation({})
+
+const routes: Route[] = [
+  {
+    path: '',
+    children: [
+      {
+        path: '/',
+        element: <Home />
+      },
+      {
+        path: '/service',
+        children: [
+          {
+            path: '/',
+            element: <h1>Service</h1>
+            // <Service />
+          },
+          {
+            path: 'serviceDescription',
+            element: <h1>Service Description</h1>
+            // <ServiceDescription />
+          }
+        ]
+      },
+      {
+        path: '/about-us',
+        element:<h1>About Us</h1>
+        //  <AboutUs />
+      },
+      {
+        path: '/contact-us',
+        element: <h1>Contact</h1>
+        // <ContactUs />
+      },
+      {
+        path: '/why-us',
+        element: <h1>Why us</h1>
+        //  <WhyUs />
+      },
+      {
+        path: '/get-started',
+        element: <h1>Get started</h1>
+        // <GetStarted />
+      },
+      {
+        path: '/client',
+        children: [
+          {
+            path: '/',
+            element: <h1>Client</h1>
+            // <Client />
+          },
+          {
+            path: 'clientDescription',
+            element: <h1>Client Description</h1>
+            // <ClientDescription />
+          }
+        ]
+      }
+    ]
+  }
+]
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router location={location} routes={routes}>
+      <Shell/>
+    </Router>
   );
 }
 
