@@ -13,7 +13,6 @@ import {
   Link
 } from '@mui/material';
 import React from 'react';
-// import AutoPlay from './carousel-swiper/customSwiper';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
@@ -363,7 +362,7 @@ const Home = () => {
                     md: '140px',
                     lg: '284px'
                   },
-                  borderBottom: selectedTab == 0 ? '2px solid black' : '',
+                  borderBottom: selectedTab === 0 ? '2px solid black' : '',
                   m: '10px',
                   fontWeight: 'bold',
                   fontSize: '18px'
@@ -397,7 +396,7 @@ const Home = () => {
                     md: '140px',
                     lg: '284px'
                   },
-                  borderBottom: selectedTab == 1 ? '2px solid black' : '',
+                  borderBottom: selectedTab === 1 ? '2px solid black' : '',
                   m: '10px',
                   fontWeight: 'bold'
                 }}
@@ -430,7 +429,7 @@ const Home = () => {
                     md: '140px',
                     lg: '284px'
                   },
-                  borderBottom: selectedTab == 2 ? '2px solid black' : '',
+                  borderBottom: selectedTab === 2 ? '2px solid black' : '',
                   m: '10px',
                   fontWeight: 'bold',
                   fontSize: '18px'
@@ -465,7 +464,7 @@ const Home = () => {
                     md: '140px',
                     lg: '284px'
                   },
-                  borderBottom: selectedTab == 3 ? '2px solid black' : '',
+                  borderBottom: selectedTab === 3 ? '2px solid black' : '',
                   fontWeight: 'bold',
                   fontSize: '18px'
                 }}
@@ -499,7 +498,7 @@ const Home = () => {
                     md: '140px',
                     lg: '284px'
                   },
-                  borderBottom: selectedTab == 4 ? '2px solid black' : '',
+                  borderBottom: selectedTab === 4 ? '2px solid black' : '',
                   fontWeight: 'bold',
                   fontSize: '18px'
                 }}
