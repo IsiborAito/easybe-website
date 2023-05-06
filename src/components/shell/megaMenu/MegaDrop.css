@@ -1,0 +1,37 @@
+/* Mega dropdown container */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    /* width: 80%; */
+  }
+  
+  /* Dropdown content */
+  .dropdown-content {
+    position: absolute;
+    display: none;
+    width: 900px; /* Set the minimum width */
+    z-index: 1;
+  }
+  
+  /* Show dropdown content on hover */
+  .dropdown:hover .dropdown-content {
+    display: flex;
+  }
+  
+  /* Mega dropdown columns */
+  .column {
+    float: left;
+    width: 33.33%;
+    padding: 10px;
+    height: 250px; /* Set a fixed height */
+    overflow: auto; /* Enable scrolling if content is too long */
+    background-color: #f1f1f1;
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
