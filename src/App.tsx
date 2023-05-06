@@ -1,8 +1,8 @@
 import React from 'react';
 import Shell from './components/shell';
-import WhyUs from './components/whyUs';
 import Contact from './components/contactUs';
-import AboutUs from './components/aboutUs';
+import ClientPage from './components/client';
+import PolicyPage from './components/policies';
 import { ReactLocation, Route, Router } from '@tanstack/react-location';
 import './App.css';
 
@@ -12,7 +12,6 @@ const routes: Route[] = [
   {
     path: '',
     children: [
-      { path: '/why-us', element: <WhyUs /> },
       {
         path: '/contact-us',
         element: (
@@ -22,10 +21,18 @@ const routes: Route[] = [
         )
       },
       {
-        path: '/about-us',
+        path: '/clients',
         element: (
           <Shell>
-            <AboutUs />
+            <ClientPage />
+          </Shell>
+        )
+      },
+      {
+        path: '/policies',
+        element: (
+          <Shell>
+            <PolicyPage />
           </Shell>
         )
       }

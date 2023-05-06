@@ -10,6 +10,8 @@ import {
   MenuItem
 } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 
 const companySize = [
@@ -41,6 +43,8 @@ interface IFormInputs {
 
 const Contact = () => {
   const { handleSubmit, control, reset } = useForm<IFormInputs>();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   const onSubmit: SubmitHandler<IFormInputs> = (data) => {
     console.log(data);
@@ -50,7 +54,7 @@ const Contact = () => {
     <div
       style={{
         width: '100%',
-        height: '90vh',
+        height: isMobile ? 'auto' : '90vh',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'flex-start',
@@ -61,13 +65,13 @@ const Contact = () => {
       <div
         style={{
           backgroundColor: '#122C34',
-          padding: '4rem',
+          padding: isMobile ? '2rem' : '8rem',
           overflow: 'hidden'
         }}
       >
         <Grid
           container
-          justifyContent="space-between"
+          justifyContent="space-around"
           alignItems="flex-start"
           spacing={1}
         >
@@ -97,13 +101,13 @@ const Contact = () => {
               </Typography>
             </Stack>
           </Grid>
-          <Grid item md={6} sm={6}>
+          <Grid item md={6} sm={8}>
             <Card
               sx={{
                 padding: { lg: '2rem', sm: '1rem', xs: '0.5rem' },
-                position: 'absolute',
-                right: '5%',
-                left: { lg: '60%', sm: '40%' }
+                position: isMobile ? 'relative' : 'absolute',
+                right: isMobile ? '0%' : '5%',
+                left: isMobile ? '0%' : { lg: '60%', sm: '40%' }
               }}
               raised
             >

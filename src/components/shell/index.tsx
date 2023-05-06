@@ -7,7 +7,13 @@ interface IProps {
 
 const Shell = ({ children }: IProps) => {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column' }}>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between'
+      }}
+    >
       {children}
       <Footer />
     </div>
