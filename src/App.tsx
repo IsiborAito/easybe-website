@@ -1,10 +1,14 @@
 import React from 'react';
-import './App.css';
-import Shell from './components/shell/shell';
-import { ReactLocation, Route, Router } from '@tanstack/react-location'
+import Shell from './components/shell';
+import Contact from './components/contactUs';
+import ClientPage from './components/client';
+import PolicyPage from './components/policies';
+import { ReactLocation, Route, Router } from '@tanstack/react-location';
 import Home from './components/home/home';
+import theme from './theme';
+import { ThemeProvider } from '@mui/material/styles';
 
-const location = new ReactLocation({})
+const location = new ReactLocation({});
 
 const routes: Route[] = [
   {
@@ -12,68 +16,45 @@ const routes: Route[] = [
     children: [
       {
         path: '/',
-        element: <Home />
-      },
-      {
-        path: '/service',
-        children: [
-          {
-            path: '/',
-            element: <h1>Service</h1>
-            // <Service />
-          },
-          {
-            path: 'serviceDescription',
-            element: <h1>Service Description</h1>
-            // <ServiceDescription />
-          }
-        ]
-      },
-      {
-        path: '/about-us',
-        element:<h1>About Us</h1>
-        //  <AboutUs />
+        element: (
+          <Shell>
+            <Home />
+          </Shell>
+        )
       },
       {
         path: '/contact-us',
-        element: <h1>Contact</h1>
-        // <ContactUs />
+        element: (
+          <Shell>
+            <Contact />
+          </Shell>
+        )
       },
       {
-        path: '/why-us',
-        element: <h1>Why us</h1>
-        //  <WhyUs />
+        path: '/clients',
+        element: (
+          <Shell>
+            <ClientPage />
+          </Shell>
+        )
       },
       {
-        path: '/get-started',
-        element: <h1>Get started</h1>
-        // <GetStarted />
-      },
-      {
-        path: '/client',
-        children: [
-          {
-            path: '/',
-            element: <h1>Client</h1>
-            // <Client />
-          },
-          {
-            path: 'clientDescription',
-            element: <h1>Client Description</h1>
-            // <ClientDescription />
-          }
-        ]
+        path: '/policies',
+        element: (
+          <Shell>
+            <PolicyPage />
+          </Shell>
+        )
       }
     ]
   }
-]
-
+];
 
 function App() {
   return (
-    <Router location={location} routes={routes}>
-      <Shell/>
-    </Router>
+    <ThemeProvider theme={theme}>
+      <Router location={location} routes={routes} />
+    </ThemeProvider>
   );
 }
 
