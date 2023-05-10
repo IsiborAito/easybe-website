@@ -41,3 +41,54 @@ export const FAQs = [
     answer: `Simply contact us to schedule a consultation. Our team will work with you to understand your specific needs and provide a detailed project proposal and estimate. From there, we can begin the custom software development process.`
   }
 ];
+
+export const TabPanels = [
+  {
+    title: 'Custom Software Development',
+    subtitle: `We create solutions for startups and enterprises with elite
+        software development`,
+    point1: 'Building process:',
+    point1details: `We get you from an idea
+        all the way to working solution.`,
+    point2: 'Bespoke solutions:',
+    point2details: `Tailor made software for
+        all your business needs`,
+    buttonText: 'Software development'
+  },
+  {
+    title: 'Mobile App Development',
+    subtitle: `We create mobile app application for both Android and iOs
+        operating systems.`,
+    point1: 'Large market:',
+    point1details: `You can reach millions of
+        users through the vibrant mobile market.`,
+    point2: 'Cross platforms:',
+    point2details: `We create mobile app
+        application for both Android and iOs operating systems.`,
+    buttonText: 'Mobile App development'
+  },
+  {
+    title: 'Web App Development',
+    subtitle: `We create elite web applications that will help grow your
+        business.`,
+    point1: 'Flexible:',
+    point1details: `Web applications that can grow
+        and expand with your business.`,
+    point2: 'Highly accessible:',
+    point2details: `Web app that can be used
+        an all browsers and every OS.`,
+    buttonText: 'Web App development'
+  },
+  {
+    title: 'Agile Development Teams',
+    subtitle: `Hire great and managed development teams for every software
+        need.`,
+    point1: 'More capability:',
+    point1details: `Hire external teams that
+        fit right into your business. Helping you reach your goals.`,
+    point2: 'Agile:',
+    point2details: `A team that is able to scale with
+        your projects.`,
+    buttonText: 'Development teams'
+  }
+];

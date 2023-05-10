@@ -7,7 +7,6 @@ import {
   Typography,
   Tabs,
   Tab,
-  Divider,
   Accordion,
   AccordionSummary,
   AccordionDetails,
@@ -25,7 +24,8 @@ import LaptopIcon from '@mui/icons-material/Laptop';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { FAQs } from '../../utilities/data';
+import { FAQs, TabPanels } from '../../utilities/data';
+import { useNavigate } from '@tanstack/react-location';
 // import required modules
 
 {
@@ -57,7 +57,7 @@ function TabPanel(props: TabPanelProps) {
 const MainDiv = styled(Box)(({ theme }) => ({
   height: 'fit-content',
   backgroundColor: ' #122c34',
-  padding: '8rem',
+  padding: '6rem',
   position: 'relative',
   color: 'white',
   display: 'flex',
@@ -72,6 +72,9 @@ const MainDiv = styled(Box)(({ theme }) => ({
   },
   [theme.breakpoints.down('sm')]: {
     padding: '1rem'
+  },
+  [theme.breakpoints.down('xs')]: {
+    marginTop: '4rem'
   }
 }));
 
@@ -95,7 +98,7 @@ const TextBox = styled(Box)(({ theme }) => ({
   }
 }));
 const ImageBox = styled(Box)(({ theme }) => ({
-  width: '40%',
+  width: '100%',
   height: '600px',
   backgroundColor: '#aaff',
   position: 'relative',
@@ -108,7 +111,6 @@ const ImageBox = styled(Box)(({ theme }) => ({
   [theme.breakpoints.down('lg')]: {
     flexDirection: 'column',
     height: '300px',
-    width: '50%',
     marginBottom: '10px'
   }
 })); /* Hero section styling end*/
@@ -126,6 +128,12 @@ const Home = () => {
     (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
       setExpanded(isExpanded ? panel : false);
     };
+
+  const navigate = useNavigate();
+  const handleNav = () => {
+    navigate({ to: '/contact-us', replace: false });
+    window.scrollTo(0, 0);
+  };
 
   const dataImg = [
     '/apple-logo.png',
@@ -182,68 +190,56 @@ const Home = () => {
     <>
       {/* Hero  section*/}
       <MainDiv>
-        <TextBox>
-          <Typography variant="h2" sx={{ fontWeight: 700 }}>
-            Transform your business with custom software
-          </Typography>
-          <Typography
-            variant="subtitle2"
-            fontSize={'30px'}
-            paddingTop={' 3.5rem'}
-            paddingBottom={' 3.5rem'}
-          >
-            Easybe : The easy choice for custom software
-          </Typography>
-          <Box
-            sx={{
-              lineHeight: 2,
-              fontFamily: 'Space Grotesk, sans-serif',
-              textAlign: 'start',
-              height: 'fit-content',
-              width: { sm: '100%', md: '85%', lg: '85%' },
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-evenly',
-              alignItems: 'flex-start',
-              marginTop: '30px',
-              fontWeight: 'light',
-              letterSpacing: 1.5
-            }}
-          >
-            <Typography variant="h5" fontWeight={300}>
-              With our innovative and tailored solutions, we can help take your
-              business to the next level. At Easybe, we understand that every
-              business has unique needs and challenges, which is why we work
-              closely with our clients to create software that meets their
-              specific requirements.
-            </Typography>
-
-            <Button
-              variant="contained"
-              sx={{
-                backgroundColor: '#ee8434',
-                boxShadow: 0,
-                height: '70px',
-                width: isMobile ? '100%' : '190px',
-                fontSize: '22px',
-                marginBottom: '10px',
-                marginTop: '30px',
-                '&:hover': {
-                  backgroundColor: 'darkorange'
-                }
-              }}
-            >
-              Get Started
-            </Button>
-          </Box>
-        </TextBox>
-        <ImageBox>Box 2</ImageBox>
+        <Grid container justifyContent="space-evenly" alignItems="flex-start">
+          <Grid item md={7} sm={12} xs={12}>
+            <Stack>
+              <Typography variant="h2" sx={{ fontWeight: 700 }}>
+                Transform your business with custom software
+              </Typography>
+              <Typography
+                variant="subtitle2"
+                fontSize={'30px'}
+                paddingTop={' 3.5rem'}
+                paddingBottom={' 3.5rem'}
+              >
+                Easybe : The easy choice for custom software
+              </Typography>
+              <Typography variant="h5" fontWeight={300}>
+                With our innovative and tailored solutions, we can help take
+                your business to the next level. At Easybe, we understand that
+                every business has unique needs and challenges, which is why we
+                work closely with our clients to create software that meets
+                their specific requirements.
+              </Typography>
+              <Button
+                variant="contained"
+                onClick={handleNav}
+                sx={{
+                  backgroundColor: '#ee8434',
+                  boxShadow: 0,
+                  height: '70px',
+                  width: isMobile ? '100%' : '190px',
+                  fontSize: '22px',
+                  marginBottom: '10px',
+                  marginTop: '30px',
+                  '&:hover': {
+                    backgroundColor: 'darkorange'
+                  }
+                }}
+              >
+                Get Started
+              </Button>
+            </Stack>
+          </Grid>
+          <Grid item md={5} sm={12} xs={12}>
+            <ImageBox>Box 2</ImageBox>
+          </Grid>
+        </Grid>
       </MainDiv>
-
       {/* Proficient in a range of software development technologies */}
       <Grid
         justifyContent={'center'}
-        sx={{ padding: { lg: '100px', sm: '50px', xs: '20px' } }}
+        sx={{ padding: { lg: '100px', sm: '50px', xs: '40px' } }}
         container
         spacing={3}
         md={12}
@@ -269,12 +265,12 @@ const Home = () => {
                 <Box
                   sx={{
                     backgroundColor: '#f2c6a4',
-                    width: { lg: '100px', md: '50px', sm: '60px', xs: '40px' },
+                    width: { lg: '100px', md: '80px', sm: '60px', xs: '60px' },
                     height: {
                       lg: '100px',
-                      md: '50px',
+                      md: '80px',
                       sm: '60px',
-                      xs: '40px'
+                      xs: '60px'
                     },
                     display: 'flex',
                     justifyContent: 'center',
@@ -284,7 +280,7 @@ const Home = () => {
                 >
                   <img
                     src={data}
-                    height="40%"
+                    height="50%"
                     width={'100%'}
                     alt=""
                     style={{ objectFit: 'contain' }}
@@ -294,11 +290,11 @@ const Home = () => {
             ))}
           </Slider>
         </Grid>
-
         <Grid item md={2} lg={2} sm={4} xs={5}>
           <Button
             variant="contained"
             disableElevation
+            onClick={handleNav}
             sx={{
               backgroundColor: '#FFFD82',
               height: { sm: '50px', md: '60px', lg: '70px' },
@@ -316,7 +312,6 @@ const Home = () => {
           </Button>
         </Grid>
       </Grid>
-
       {/* Why Choose Easybe? */}
       <Grid
         container
@@ -355,11 +350,7 @@ const Home = () => {
         </Grid>
         <Grid item md={4} sm={12} xs={12}>
           <Stack justifyContent="flex-end">
-            <Typography
-              variant="h6"
-              align={isMobile ? 'left' : 'right'}
-              sx={{ fontWeight: 400 }}
-            >
+            <Typography variant="h5" align="left" sx={{ fontWeight: 400 }}>
               Our team of experienced software developers has expertise in a
               wide range of technologies and programming languages. <br />
               <br />
@@ -370,7 +361,6 @@ const Home = () => {
           </Stack>
         </Grid>
       </Grid>
-
       {/* OUR expert SERVICES Section */}
       <Grid
         direction={'column'}
@@ -448,154 +438,45 @@ const Home = () => {
           </Grid>
           <Grid item md={1}></Grid>
           <Grid item md={8} sm={11} xs={12}>
-            <TabPanel value={selectedTab} index={0}>
-              <Stack direction={{ lg: 'row', sm: 'column' }} spacing={2}>
-                <div style={{ width: '50%', height: '200px' }} />
-                <Stack spacing={2}>
-                  <Typography variant="h5" sx={{ fontWeight: 700 }}>
-                    Custom Software Development
-                  </Typography>
-                  <Typography variant="h5" sx={{ fontWeight: 400 }}>
-                    We create solutions for startups and enterprises with elite
-                    software development
-                  </Typography>
-                  <Typography variant="h5" sx={{ fontWeight: 400 }}>
-                    <strong>Building process:</strong> We get you from an idea
-                    all the way to working solution.
-                  </Typography>
-                  <Typography variant="h5" sx={{ fontWeight: 400 }}>
-                    <strong>Bespoke solutions:</strong> Tailor made software for
-                    all your business needs
-                  </Typography>
-                  <Button
-                    variant="contained"
-                    size="large"
-                    color="secondary"
-                    disableElevation
-                    fullWidth
-                    sx={{
-                      width: { lg: '50%', xs: '100%' },
-                      paddingTop: '1rem',
-                      paddingBottom: '1rem'
-                    }}
-                  >
-                    Software development
-                  </Button>
+            {TabPanels.map((panel, index) => (
+              <TabPanel value={selectedTab} index={index} key={index}>
+                <Stack direction={{ lg: 'row', sm: 'column' }} spacing={2}>
+                  <div style={{ width: '50%', height: '200px' }} />
+                  <Stack spacing={2}>
+                    <Typography variant="h5" sx={{ fontWeight: 700 }}>
+                      {panel.title}
+                    </Typography>
+                    <Typography variant="h5" sx={{ fontWeight: 400 }}>
+                      {panel.subtitle}
+                    </Typography>
+                    <Typography variant="h5" sx={{ fontWeight: 400 }}>
+                      <strong>{panel.point1}</strong> {panel.point1details}
+                    </Typography>
+                    <Typography variant="h5" sx={{ fontWeight: 400 }}>
+                      <strong>{panel.point2}</strong>
+                      {panel.point2details}
+                    </Typography>
+                    <Button
+                      variant="contained"
+                      size="large"
+                      color="secondary"
+                      disableElevation
+                      fullWidth
+                      sx={{
+                        width: { lg: '50%', xs: '100%' },
+                        paddingTop: '1rem',
+                        paddingBottom: '1rem'
+                      }}
+                    >
+                      {panel.buttonText}
+                    </Button>
+                  </Stack>
                 </Stack>
-              </Stack>
-            </TabPanel>
-            <TabPanel value={selectedTab} index={1}>
-              <Stack direction={{ lg: 'row', sm: 'column' }} spacing={2}>
-                <div style={{ width: '50%', height: '200px' }} />
-                <Stack spacing={2}>
-                  <Typography variant="h5" sx={{ fontWeight: 700 }}>
-                    Mobile App Development
-                  </Typography>
-                  <Typography variant="h5" sx={{ fontWeight: 400 }}>
-                    We create mobile app application for both Android and iOs
-                    operating systems.
-                  </Typography>
-                  <Typography variant="h5" sx={{ fontWeight: 400 }}>
-                    <strong>Large market:</strong> You can reach millions of
-                    users through the vibrant mobile market.
-                  </Typography>
-                  <Typography variant="h5" sx={{ fontWeight: 400 }}>
-                    <strong>Cross platforms:</strong> We create mobile app
-                    application for both Android and iOs operating systems.
-                  </Typography>
-                  <Button
-                    variant="contained"
-                    size="large"
-                    color="secondary"
-                    disableElevation
-                    sx={{
-                      width: { lg: '50%', xs: '100%' },
-                      paddingTop: '1rem',
-                      paddingBottom: '1rem',
-                      fontSize: '18px'
-                    }}
-                  >
-                    Mobile App development
-                  </Button>
-                </Stack>
-              </Stack>
-            </TabPanel>
-            <TabPanel value={selectedTab} index={2}>
-              <Stack direction={{ lg: 'row', sm: 'column' }} spacing={2}>
-                <div style={{ width: '50%', height: '200px' }} />
-                <Stack spacing={2}>
-                  <Typography variant="h5" sx={{ fontWeight: 700 }}>
-                    Web App Development
-                  </Typography>
-                  <Typography variant="h5" sx={{ fontWeight: 400 }}>
-                    We create elite web applications that will help grow your
-                    business.
-                  </Typography>
-                  <Typography variant="h5" sx={{ fontWeight: 400 }}>
-                    <strong>Flexible:</strong> Web applications that can grow
-                    and expand with your business.
-                  </Typography>
-                  <Typography variant="h5" sx={{ fontWeight: 400 }}>
-                    <strong>Highly accessible:</strong> Web app that can be used
-                    an all browsers and every OS.
-                  </Typography>
-                  <Button
-                    variant="contained"
-                    size="large"
-                    color="secondary"
-                    disableElevation
-                    sx={{
-                      width: { lg: '50%', xs: '100%' },
-                      paddingTop: '1rem',
-                      paddingBottom: '1rem',
-                      fontSize: '18px'
-                    }}
-                  >
-                    Web App development
-                  </Button>
-                </Stack>
-              </Stack>
-            </TabPanel>
-            <TabPanel value={selectedTab} index={3}>
-              <Stack direction={{ lg: 'row', sm: 'column' }} spacing={2}>
-                <div style={{ width: '50%', height: '200px' }} />
-                <Stack spacing={2}>
-                  <Typography variant="h5" sx={{ fontWeight: 700 }}>
-                    Agile Development Teams
-                  </Typography>
-                  <Typography variant="h5" sx={{ fontWeight: 400 }}>
-                    Hire great and managed development teams for every software
-                    need.
-                  </Typography>
-                  <Typography variant="h5" sx={{ fontWeight: 400 }}>
-                    <strong>More capability:</strong> Hire external teams that
-                    fit right into your business. Helping you reach your goals.
-                  </Typography>
-                  <Typography variant="h5" sx={{ fontWeight: 400 }}>
-                    <strong>Agile:</strong> A team that is able to scale with
-                    your projects.
-                  </Typography>
-                  <Button
-                    variant="contained"
-                    size="large"
-                    color="secondary"
-                    disableElevation
-                    sx={{
-                      width: { lg: '50%', xs: '100%' },
-                      paddingTop: '1rem',
-                      paddingBottom: '1rem',
-                      fontSize: '18px'
-                    }}
-                  >
-                    Development teams
-                  </Button>
-                </Stack>
-              </Stack>
-            </TabPanel>
+              </TabPanel>
+            ))}
           </Grid>
         </Grid>
       </Grid>
-
       {/* We provide expert software solutions */}
       <Grid
         direction={'column'}
@@ -640,7 +521,7 @@ const Home = () => {
                 display: 'flex',
                 flexDirection: 'row',
                 alignItems: 'right',
-                p: '35px'
+                p: { lg: '35px', md: '35px', sm: '20px', xs: '14px' }
               }}
             >
               <Grid item padding={'10px'}>
@@ -676,7 +557,7 @@ const Home = () => {
                 display: 'flex',
                 flexDirection: 'row',
                 alignItems: 'right',
-                p: '35px'
+                p: { lg: '35px', md: '35px', sm: '20px', xs: '14px' }
               }}
             >
               <Grid padding={'10px'}>
@@ -739,7 +620,6 @@ const Home = () => {
               </Box>
             </Link>
           </Grid>
-
           <Grid
             item
             md={6}
@@ -755,7 +635,7 @@ const Home = () => {
                 display: 'flex',
                 flexDirection: 'row',
                 alignItems: 'right',
-                p: '35px'
+                p: { lg: '35px', md: '35px', sm: '20px', xs: '14px' }
               }}
             >
               <Grid padding={'10px'}>
@@ -774,7 +654,6 @@ const Home = () => {
           </Grid>
         </Grid>
       </Grid>
-
       {/*Frequently asked questions*/}
       <Grid
         container
@@ -782,7 +661,7 @@ const Home = () => {
         direction={'column'}
         alignItems={'left'}
         spacing={2}
-        p={'3rem'}
+        p={isMobile ? '2rem' : '5rem'}
       >
         <Grid item md={12}>
           <Typography variant="h2" fontWeight={700}>
@@ -825,21 +704,22 @@ const Home = () => {
       <Grid
         container
         direction={'row'}
-        sx={{ padding: { lg: '4rem', sm: '2rem', xs: '1.5rem' } }}
+        sx={{ padding: { lg: '6rem', sm: '2rem', xs: '1.5rem', md: '4rem' } }}
         bgcolor={'#122c34'}
         color={'white'}
         justifyContent={'space-between'}
         alignItems={'center'}
       >
-        <Grid item md={8} sm={12} xs={12}>
+        <Grid item md={9} sm={12} xs={12}>
           <Typography variant="h2" fontWeight={700}>
             Build your solution today
           </Typography>
         </Grid>
-        <Grid item md={4} sm={12} xs={12}>
+        <Grid item md={3} sm={12} xs={12}>
           <Button
             variant="contained"
             fullWidth
+            onClick={handleNav}
             sx={{
               backgroundColor: '#ee8434',
               boxShadow: 0,

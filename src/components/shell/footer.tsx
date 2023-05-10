@@ -77,6 +77,12 @@ const Footer = () => {
             lg: '4rem 8rem 4rem 4rem',
             xs: '2rem 4rem 2rem 2rem',
             sm: '2rem 4rem 2rem 2rem'
+          },
+          paddingTop: {
+            lg: '10rem',
+            xs: '4rem',
+            sm: '5rem',
+            md: '6rem'
           }
         }}
         spacing={4}

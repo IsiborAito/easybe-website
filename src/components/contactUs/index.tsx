@@ -54,12 +54,13 @@ const Contact = () => {
     <div
       style={{
         width: '100%',
-        height: isMobile ? 'auto' : '90vh',
+        height: isMobile ? 'auto' : '80vh',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'flex-start',
         position: 'relative',
-        gap: '8rem'
+        gap: '8rem',
+        marginTop: isMobile ? '4rem' : '0rem'
       }}
     >
       <div
@@ -82,7 +83,7 @@ const Contact = () => {
                 sx={{
                   fontWeight: 700,
                   color: 'white',
-                  fontSize: { sm: '42px' }
+                  fontSize: { sm: '42px', md: '64px' }
                 }}
               >
                 Start a project
