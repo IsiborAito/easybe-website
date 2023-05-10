@@ -72,14 +72,20 @@ const Footer = () => {
       <Grid
         container
         justifyContent={'space-between'}
-        sx={{ padding: '4rem' }}
+        sx={{
+          padding: {
+            lg: '4rem 8rem 4rem 4rem',
+            xs: '2rem 4rem 2rem 2rem',
+            sm: '2rem 4rem 2rem 2rem'
+          }
+        }}
         spacing={4}
       >
-        <Grid item md={3} sm={12}>
+        <Grid item md={3} sm={12} xs={12}>
           <Stack spacing={2}>
             <img
               width="100%"
-              height="80px"
+              height="auto"
               src="https://res.cloudinary.com/purenelle/image/upload/v1683388038/Easybe/easybe_logo_dark_tbiukr.png"
               alt="test"
             />
@@ -132,11 +138,11 @@ const Footer = () => {
         <Grid item md={12} sm={12}>
           <div style={{ height: '100px' }} />
         </Grid>
-        <Grid item md={12} sm={12}>
+        <Grid item md={12} sm={12} xs={12}>
           <Stack spacing={2}>
-            <Divider variant="fullWidth" />
+            <Divider variant="fullWidth" flexItem />
             <Stack
-              direction={{ md: 'row', sm: 'column' }}
+              direction={{ md: 'row', sm: 'column', xs: 'column' }}
               justifyContent="space-between"
             >
               <Typography variant="body2">

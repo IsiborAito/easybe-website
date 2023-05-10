@@ -6,14 +6,17 @@ import {
   Grid,
   Typography,
   Tabs,
+  Tab,
   Divider,
   Accordion,
   AccordionSummary,
   AccordionDetails,
-  Link
+  Link,
+  Stack
 } from '@mui/material';
 import React from 'react';
-// import AutoPlay from './carousel-swiper/customSwiper';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
@@ -22,11 +25,35 @@ import LaptopIcon from '@mui/icons-material/Laptop';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { FAQs } from '../../utilities/data';
 // import required modules
 
 {
   /* Hero section styling start*/
 }
+
+interface TabPanelProps {
+  children?: React.ReactNode;
+  index: number;
+  value: number;
+}
+
+function TabPanel(props: TabPanelProps) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`vertical-tabpanel-${index}`}
+      aria-labelledby={`vertical-tab-${index}`}
+      {...other}
+    >
+      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+    </div>
+  );
+}
+
 const MainDiv = styled(Box)(({ theme }) => ({
   height: 'fit-content',
   backgroundColor: ' #122c34',
@@ -49,7 +76,6 @@ const MainDiv = styled(Box)(({ theme }) => ({
 }));
 
 const TextBox = styled(Box)(({ theme }) => ({
-  width: '50%',
   height: 'fit-content',
   // backgroundColor: '#1ff',
   position: 'relative',
@@ -89,10 +115,17 @@ const ImageBox = styled(Box)(({ theme }) => ({
 
 const Home = () => {
   const [selectedTab, setselectedTab] = React.useState(0);
+  const [expanded, setExpanded] = React.useState<string | false>(false);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
-  const handleChange = (val: number) => {
-    setselectedTab(val);
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setselectedTab(newValue);
   };
+  const handleOpen =
+    (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
+      setExpanded(isExpanded ? panel : false);
+    };
 
   const dataImg = [
     '/apple-logo.png',
@@ -137,8 +170,8 @@ const Home = () => {
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
+          slidesToShow: 2,
+          slidesToScroll: 2,
           pauseOnHover: true
         }
       }
@@ -167,7 +200,7 @@ const Home = () => {
               fontFamily: 'Space Grotesk, sans-serif',
               textAlign: 'start',
               height: 'fit-content',
-              width: { sm: '70%', md: '85%', lg: '85%' },
+              width: { sm: '100%', md: '85%', lg: '85%' },
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-evenly',
@@ -177,21 +210,27 @@ const Home = () => {
               letterSpacing: 1.5
             }}
           >
-            With our innovative and tailored solutions, we can help take your
-            business to the next level. At Easybe, we understand that every
-            business has unique needs and challenges, which is why we work
-            closely with our clients to create software that meets their
-            specific requirements.
+            <Typography variant="h5" fontWeight={300}>
+              With our innovative and tailored solutions, we can help take your
+              business to the next level. At Easybe, we understand that every
+              business has unique needs and challenges, which is why we work
+              closely with our clients to create software that meets their
+              specific requirements.
+            </Typography>
+
             <Button
               variant="contained"
               sx={{
                 backgroundColor: '#ee8434',
                 boxShadow: 0,
                 height: '70px',
-                width: '190px',
+                width: isMobile ? '100%' : '190px',
                 fontSize: '22px',
                 marginBottom: '10px',
-                marginTop: '30px'
+                marginTop: '30px',
+                '&:hover': {
+                  backgroundColor: 'darkorange'
+                }
               }}
             >
               Get Started
@@ -203,28 +242,38 @@ const Home = () => {
 
       {/* Proficient in a range of software development technologies */}
       <Grid
+        justifyContent={'center'}
+        sx={{ padding: { lg: '100px', sm: '50px', xs: '20px' } }}
         container
+        spacing={3}
         md={12}
-        direction={'column'}
         alignItems={'center'}
-        p={'100px'}
       >
-        <Typography variant="h4">
-          Proficient in a range of software development technologies
-        </Typography>
+        <Grid item md={5} lg={5}>
+          <Typography variant="h4" align={isMobile ? 'center' : 'left'}>
+            Proficient in a range of software development technologies
+          </Typography>
+        </Grid>
 
-        <Grid sx={{ width: '100%', p: '50px', position: 'relative' }}>
+        <Grid
+          item
+          md={12}
+          lg={12}
+          sm={12}
+          xs={12}
+          sx={{ position: 'relative' }}
+        >
           <Slider {...settings}>
             {dataImg.map((data) => (
               <Box sx={{}}>
                 <Box
                   sx={{
                     backgroundColor: '#f2c6a4',
-                    width: { lg: '100px', md: '50px', sm: '40px', xs: '40px' },
+                    width: { lg: '100px', md: '50px', sm: '60px', xs: '40px' },
                     height: {
                       lg: '100px',
                       md: '50px',
-                      sm: '40px',
+                      sm: '60px',
                       xs: '40px'
                     },
                     display: 'flex',
@@ -246,17 +295,21 @@ const Home = () => {
           </Slider>
         </Grid>
 
-        <Grid item>
+        <Grid item md={2} lg={2} sm={4} xs={5}>
           <Button
             variant="contained"
+            disableElevation
             sx={{
               backgroundColor: '#FFFD82',
-              boxShadow: 0,
               height: { sm: '50px', md: '60px', lg: '70px' },
-              width: { sm: '100px', md: '150px', lg: '190px' },
-              fontSize: { sm: '10px', md: '15px', lg: '22px' },
+              width: { sm: '100%', md: '150px', lg: '190px', xs: '100%' },
+              fontSize: { sm: '15px', md: '15px', lg: '22px' },
               marginBottom: '10px',
-              marginTop: '30px'
+              marginTop: '30px',
+              color: '#122C34',
+              '&:hover': {
+                backgroundColor: 'yellow'
+              }
             }}
           >
             Get Started
@@ -267,43 +320,54 @@ const Home = () => {
       {/* Why Choose Easybe? */}
       <Grid
         container
-        md={12}
-        direction={'column'}
-        justifyContent={'space-evenly'}
+        justifyContent={'center'}
         alignItems={'center'}
         bgcolor={'#122c34'}
         color={'white'}
+        spacing={isMobile ? 3 : 0}
+        sx={{ padding: { xs: '1rem', lg: '6rem', sm: '6rem' } }}
       >
-        <Typography variant="h5" p={'50px'} color={'#FFFD82'}>
-          Why Choose Easybe?
-        </Typography>
+        <Grid item md={12}>
+          <Typography
+            align="center"
+            variant="h5"
+            color={'#FFFD82'}
+            sx={{ fontWeight: 700 }}
+          >
+            Why Choose Easybe?
+          </Typography>
+        </Grid>
 
-        <Grid
-          item
-          container
-          direction={{ sm: 'column', xs: 'column', md: 'row' }}
-          md={12}
-          justifyContent={'space-around'}
-          p={'50px'}
-        >
-          <Grid item md={4}>
-            <Typography variant="h3">
-              Easybe tailors software solutions to meet your business needs
-            </Typography>
-          </Grid>
-          <Divider
-            sx={{ backgroundColor: 'white' }}
-            orientation="vertical"
-            flexItem
+        <Grid item md={4} sm={12} xs={12}>
+          <Typography variant="h2" sx={{ fontWeight: 700 }}>
+            Easybe tailors software solutions to meet your business needs
+          </Typography>
+        </Grid>
+        <Grid item md={4} sm={12} xs={12} container justifyContent={'center'}>
+          <div
+            style={{
+              width: isMobile ? '100%' : '2px',
+              height: isMobile ? '2px' : '100px',
+              backgroundColor: 'white',
+              display: 'inline-block'
+            }}
           />
-          <Grid item md={6}>
-            <Typography variant="body1" margin={'auto'}>
-              Lorem ipsum dolor sit amet consectetur. Dis nisi et fames
-              pellentesque urna feugiat in vestibulum. <br /> <br />
-              Lorem ipsum dolor sit amet consectetur. Dis nisi et fames
-              pellentesque urna feugiat in vestibulum.
+        </Grid>
+        <Grid item md={4} sm={12} xs={12}>
+          <Stack justifyContent="flex-end">
+            <Typography
+              variant="h6"
+              align={isMobile ? 'left' : 'right'}
+              sx={{ fontWeight: 400 }}
+            >
+              Our team of experienced software developers has expertise in a
+              wide range of technologies and programming languages. <br />
+              <br />
+              We work closely with our clients throughout the development
+              process to ensure that we are delivering a solution that meets
+              their needs and exceeds their expectations.
             </Typography>
-          </Grid>
+          </Stack>
         </Grid>
       </Grid>
 
@@ -318,21 +382,29 @@ const Home = () => {
           md: 'center',
           sm: 'flex-start',
           xs: 'flex-start',
-          lg: 'center'
+          lg: 'flex-start'
         }}
         sx={{
           width: '100%',
           backgroundColor: 'white',
           color: 'black',
-          padding: { sm: '2rem', xs: '2rem', md: '8rem', lg: '8rem' }
+          padding: { sm: '2rem', xs: '2rem', md: '8rem', lg: '8rem' },
+          minHeight: { md: '65vh', lg: '65vh' }
         }}
       >
-        <Typography marginBottom={3} variant="h5">
-          OUR Expert SERVICES
-        </Typography>
-        <Typography variant="h1" marginBottom={10}>
-          Custom solutions with SovTech
-        </Typography>
+        <Grid item md={12}>
+          <Stack>
+            <Typography variant="h2" gutterBottom sx={{ fontWeight: 700 }}>
+              Building solutions with EasyBe
+            </Typography>
+            <Typography
+              variant="h5"
+              sx={{ fontWeight: 700, marginBottom: '4rem' }}
+            >
+              Our Services
+            </Typography>
+          </Stack>
+        </Grid>
         <Grid
           direction={'row'}
           item
@@ -340,492 +412,187 @@ const Home = () => {
           md={12}
           sx={{ width: { sm: '100%', xs: '100%' } }}
         >
-          <Grid item md={3}>
+          <Grid item md={2} sm={12}>
             <Tabs
-              orientation="vertical"
+              orientation={isMobile ? 'horizontal' : 'vertical'}
+              variant="scrollable"
               value={selectedTab}
-              sx={{
-                width: '300px',
-                '& .MuiTabs-indicator': { display: 'none' }
-              }}
+              onChange={handleChange}
+              indicatorColor="secondary"
+              aria-label="Vertical tabs"
+              scrollButtons
+              allowScrollButtonsMobile
+              sx={{ borderRight: 1, borderColor: 'divider' }}
             >
-              <Button
-                onClick={() => handleChange(0)}
-                variant="text"
-                sx={{
-                  // backgroundColor: '#3f4c64',
-                  color: 'black',
-                  boxShadow: 0,
-                  height: '70px',
-                  width: {
-                    sm: '140px',
-                    xs: '140px',
-                    md: '140px',
-                    lg: '284px'
-                  },
-                  borderBottom: selectedTab == 0 ? '2px solid black' : '',
-                  m: '10px',
-                  fontWeight: 'bold',
-                  fontSize: '18px'
-                }}
-              >
-                <Typography
-                  sx={{
-                    fontSize: {
-                      sm: '10px',
-                      xs: '10px',
-                      md: '10px',
-                      lg: '18px'
-                    }
-                  }}
-                >
-                  Mobile App Development
-                </Typography>
-              </Button>
-
-              <Button
-                onClick={() => handleChange(1)}
-                variant="text"
-                sx={{
-                  // backgroundColor: '#3f4c64',
-                  color: 'black',
-                  boxShadow: 0,
-                  height: '70px',
-                  width: {
-                    sm: '140px',
-                    xs: '140px',
-                    md: '140px',
-                    lg: '284px'
-                  },
-                  borderBottom: selectedTab == 1 ? '2px solid black' : '',
-                  m: '10px',
-                  fontWeight: 'bold'
-                }}
-              >
-                <Typography
-                  sx={{
-                    fontSize: {
-                      sm: '10px',
-                      xs: '10px',
-                      md: '10px',
-                      lg: '18px'
-                    }
-                  }}
-                >
-                  Web App Development
-                </Typography>
-              </Button>
-
-              <Button
-                onClick={() => handleChange(2)}
-                variant="text"
-                sx={{
-                  // backgroundColor: '#3f4c64',
-                  color: 'black',
-                  boxShadow: 0,
-                  height: '70px',
-                  width: {
-                    sm: '140px',
-                    xs: '140px',
-                    md: '140px',
-                    lg: '284px'
-                  },
-                  borderBottom: selectedTab == 2 ? '2px solid black' : '',
-                  m: '10px',
-                  fontWeight: 'bold',
-                  fontSize: '18px'
-                }}
-              >
-                <Typography
-                  sx={{
-                    fontSize: {
-                      sm: '10px',
-                      xs: '10px',
-                      md: '10px',
-                      lg: '18px'
-                    }
-                  }}
-                >
-                  Software Development
-                </Typography>
-              </Button>
-
-              <Button
-                onClick={() => handleChange(3)}
-                variant="text"
-                sx={{
-                  // backgroundColor: '#3f4c64',
-                  color: 'black',
-                  boxShadow: 0,
-                  height: '70px',
-                  m: '10px',
-                  width: {
-                    sm: '140px',
-                    xs: '140px',
-                    md: '140px',
-                    lg: '284px'
-                  },
-                  borderBottom: selectedTab == 3 ? '2px solid black' : '',
-                  fontWeight: 'bold',
-                  fontSize: '18px'
-                }}
-              >
-                <Typography
-                  sx={{
-                    fontSize: {
-                      sm: '10px',
-                      xs: '10px',
-                      md: '10px',
-                      lg: '18px'
-                    }
-                  }}
-                >
-                  Software Maintenance
-                </Typography>
-              </Button>
-
-              <Button
-                variant="text"
-                onClick={() => handleChange(4)}
-                sx={{
-                  // backgroundColor: '#3f4c64',
-                  color: 'black',
-                  boxShadow: 0,
-                  height: '70px',
-                  m: '10px',
-                  width: {
-                    sm: '140px',
-                    xs: '140px',
-                    md: '140px',
-                    lg: '284px'
-                  },
-                  borderBottom: selectedTab == 4 ? '2px solid black' : '',
-                  fontWeight: 'bold',
-                  fontSize: '18px'
-                }}
-              >
-                <Typography
-                  sx={{
-                    fontSize: {
-                      sm: '10px',
-                      xs: '10px',
-                      md: '10px',
-                      lg: '18px'
-                    }
-                  }}
-                >
-                  Technology Consultants
-                </Typography>
-              </Button>
+              <Tab
+                sx={{ fontSize: { lg: '20px', sm: '14px' } }}
+                label="Software development"
+                wrapped
+              />
+              <Tab
+                sx={{ fontSize: { lg: '20px', sm: '14px' } }}
+                label="Mobile App development"
+                wrapped
+              />
+              <Tab
+                sx={{ fontSize: { lg: '20px', sm: '14px' } }}
+                label="Web App development"
+                wrapped
+              />
+              <Tab
+                sx={{ fontSize: { lg: '20px', sm: '14px' } }}
+                label="Development teams"
+                wrapped
+              />
             </Tabs>
           </Grid>
-
-          {selectedTab === 0 && (
-            <Grid
-              item
-              container
-              md={9}
-              justifyContent={'space-around'}
-              direction={'row'}
-            >
-              <Divider
-                sx={{ backgroundColor: 'black' }}
-                orientation="vertical"
-                flexItem
-              />
-              <Box
-                sx={{
-                  backgroundColor: 'red',
-                  margin: 'auto',
-                  height: '100%',
-                  width: 'auto',
-                  borderRadius: '25px'
-                }}
-              >
-                <img
-                  src="/logo512.png"
-                  alt=""
-                  height={'100%'}
-                  width={'auto'}
-                  style={{ objectFit: 'contain' }}
-                />
-              </Box>
-
-              <Grid item container direction={'column'} md={6}>
-                <Typography
-                  fontWeight={700}
-                  m={{ sm: 2, xs: 2, md: 5 }}
-                  color={'#2868ff'}
-                >
-                  OUR SERVICES
-                </Typography>
-                <Typography variant="h4" m={{ sm: 2, xs: 2, md: 3, lg: 3 }}>
-                  Custom Software Development
-                </Typography>
-                <Typography variant="body1" m={{ sm: 2, xs: 2, md: 5, lg: 5 }}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut
-                </Typography>
-              </Grid>
-            </Grid>
-          )}
-          {selectedTab === 1 && (
-            <Grid
-              item
-              container
-              md={9}
-              justifyContent={'space-around'}
-              direction={'row'}
-            >
-              <Divider
-                sx={{ backgroundColor: 'black' }}
-                orientation="vertical"
-                flexItem
-              />
-              <Box
-                sx={{
-                  backgroundColor: 'Green',
-                  margin: 'auto',
-                  height: '100%',
-                  width: 'auto',
-                  borderRadius: '25px'
-                }}
-              >
-                <img
-                  src="/logo512.png"
-                  alt=""
-                  height={'100%'}
-                  width={'auto'}
-                  style={{ objectFit: 'contain' }}
-                />
-              </Box>
-
-              <Grid item container direction={'column'} md={6}>
-                <Typography
-                  fontWeight={700}
-                  m={{ sm: 2, xs: 2, md: 5 }}
-                  color={'#2868ff'}
-                >
-                  OUR SERVICES
-                </Typography>
-                <Typography variant="h4" m={{ sm: 2, xs: 2, md: 3, lg: 3 }}>
-                  Custom Software Development
-                </Typography>
-                <Typography variant="body1" m={{ sm: 2, xs: 2, md: 5, lg: 5 }}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut
-                </Typography>
-              </Grid>
-            </Grid>
-          )}
-          {selectedTab === 2 && (
-            <Grid
-              item
-              container
-              md={9}
-              justifyContent={'space-around'}
-              direction={'row'}
-            >
-              <Divider
-                sx={{ backgroundColor: 'black' }}
-                orientation="vertical"
-                flexItem
-              />
-              <Box
-                sx={{
-                  backgroundColor: 'grey',
-                  margin: 'auto',
-                  height: '100%',
-                  width: 'auto',
-                  borderRadius: '25px'
-                }}
-              >
-                <img
-                  src="/logo512.png"
-                  alt=""
-                  height={'100%'}
-                  width={'auto'}
-                  style={{ objectFit: 'contain' }}
-                />
-              </Box>
-
-              <Grid item container direction={'column'} md={6}>
-                <Typography
-                  fontWeight={700}
-                  m={{ sm: 2, xs: 2, md: 5 }}
-                  color={'#2868ff'}
-                >
-                  OUR SERVICES
-                </Typography>
-                <Typography variant="h4" m={{ sm: 2, xs: 2, md: 3, lg: 3 }}>
-                  Custom Software Development
-                </Typography>
-                <Typography variant="body1" m={{ sm: 2, xs: 2, md: 5, lg: 5 }}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut
-                </Typography>
-              </Grid>
-            </Grid>
-          )}
-          {selectedTab === 3 && (
-            <Grid
-              item
-              container
-              md={9}
-              justifyContent={'space-around'}
-              direction={'row'}
-            >
-              <Divider
-                sx={{ backgroundColor: 'black' }}
-                orientation="vertical"
-                flexItem
-              />
-              <Box
-                sx={{
-                  backgroundColor: 'blue',
-                  margin: 'auto',
-                  height: '100%',
-                  width: 'auto',
-                  borderRadius: '25px'
-                }}
-              >
-                <img
-                  src="/logo512.png"
-                  alt=""
-                  height={'100%'}
-                  width={'auto'}
-                  style={{ objectFit: 'contain' }}
-                />
-              </Box>
-
-              <Grid item container direction={'column'} md={6}>
-                <Typography
-                  fontWeight={700}
-                  m={{ sm: 2, xs: 2, md: 5 }}
-                  color={'#2868ff'}
-                >
-                  OUR SERVICES
-                </Typography>
-                <Typography variant="h4" m={{ sm: 2, xs: 2, md: 3, lg: 3 }}>
-                  Custom Software Development
-                </Typography>
-                <Typography variant="body1" m={{ sm: 2, xs: 2, md: 5, lg: 5 }}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut
-                </Typography>
-              </Grid>
-            </Grid>
-          )}
-          {selectedTab === 4 && (
-            <Grid
-              item
-              container
-              md={9}
-              justifyContent={'space-around'}
-              direction={'row'}
-            >
-              <Divider
-                sx={{ backgroundColor: 'black' }}
-                orientation="vertical"
-                flexItem
-              />
-              <Box
-                sx={{
-                  backgroundColor: 'chocolate',
-                  margin: 'auto',
-                  height: '100%',
-                  width: 'auto',
-                  borderRadius: '25px'
-                }}
-              >
-                <img
-                  src="/logo512.png"
-                  alt=""
-                  height={'100%'}
-                  width={'auto'}
-                  style={{ objectFit: 'contain' }}
-                />
-              </Box>
-
-              <Grid item container direction={'column'} md={6}>
-                <Typography
-                  fontWeight={700}
-                  m={{ sm: 2, xs: 2, md: 5 }}
-                  color={'#2868ff'}
-                >
-                  OUR SERVICES
-                </Typography>
-                <Typography variant="h4" m={{ sm: 2, xs: 2, md: 3, lg: 3 }}>
-                  Custom Software Development
-                </Typography>
-                <Typography variant="body1" m={{ sm: 2, xs: 2, md: 5, lg: 5 }}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut
-                </Typography>
-              </Grid>
-            </Grid>
-          )}
-          {selectedTab === 5 && (
-            <Grid
-              item
-              container
-              md={9}
-              justifyContent={'space-around'}
-              direction={'row'}
-            >
-              <Divider
-                sx={{ backgroundColor: 'black', width: '10px' }}
-                orientation="vertical"
-                flexItem
-              />
-              <Box
-                sx={{
-                  backgroundColor: 'yellow',
-                  margin: 'auto',
-                  height: '100%',
-                  width: 'auto',
-                  borderRadius: '25px'
-                }}
-              >
-                <img
-                  src="/logo512.png"
-                  alt=""
-                  height={'100%'}
-                  width={'auto'}
-                  style={{ objectFit: 'contain' }}
-                />
-              </Box>
-
-              <Grid item container direction={'column'} md={6}>
-                <Typography
-                  fontWeight={700}
-                  m={{ sm: 2, xs: 2, md: 5 }}
-                  color={'#2868ff'}
-                >
-                  OUR SERVICES
-                </Typography>
-                <Typography variant="h4" m={{ sm: 2, xs: 2, md: 3, lg: 3 }}>
-                  Custom Software Development
-                </Typography>
-                <Typography variant="body1" m={{ sm: 2, xs: 2, md: 5, lg: 5 }}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut
-                </Typography>
-              </Grid>
-            </Grid>
-          )}
+          <Grid item md={1}></Grid>
+          <Grid item md={8} sm={11} xs={12}>
+            <TabPanel value={selectedTab} index={0}>
+              <Stack direction={{ lg: 'row', sm: 'column' }} spacing={2}>
+                <div style={{ width: '50%', height: '200px' }} />
+                <Stack spacing={2}>
+                  <Typography variant="h5" sx={{ fontWeight: 700 }}>
+                    Custom Software Development
+                  </Typography>
+                  <Typography variant="h5" sx={{ fontWeight: 400 }}>
+                    We create solutions for startups and enterprises with elite
+                    software development
+                  </Typography>
+                  <Typography variant="h5" sx={{ fontWeight: 400 }}>
+                    <strong>Building process:</strong> We get you from an idea
+                    all the way to working solution.
+                  </Typography>
+                  <Typography variant="h5" sx={{ fontWeight: 400 }}>
+                    <strong>Bespoke solutions:</strong> Tailor made software for
+                    all your business needs
+                  </Typography>
+                  <Button
+                    variant="contained"
+                    size="large"
+                    color="secondary"
+                    disableElevation
+                    fullWidth
+                    sx={{
+                      width: { lg: '50%', xs: '100%' },
+                      paddingTop: '1rem',
+                      paddingBottom: '1rem'
+                    }}
+                  >
+                    Software development
+                  </Button>
+                </Stack>
+              </Stack>
+            </TabPanel>
+            <TabPanel value={selectedTab} index={1}>
+              <Stack direction={{ lg: 'row', sm: 'column' }} spacing={2}>
+                <div style={{ width: '50%', height: '200px' }} />
+                <Stack spacing={2}>
+                  <Typography variant="h5" sx={{ fontWeight: 700 }}>
+                    Mobile App Development
+                  </Typography>
+                  <Typography variant="h5" sx={{ fontWeight: 400 }}>
+                    We create mobile app application for both Android and iOs
+                    operating systems.
+                  </Typography>
+                  <Typography variant="h5" sx={{ fontWeight: 400 }}>
+                    <strong>Large market:</strong> You can reach millions of
+                    users through the vibrant mobile market.
+                  </Typography>
+                  <Typography variant="h5" sx={{ fontWeight: 400 }}>
+                    <strong>Cross platforms:</strong> We create mobile app
+                    application for both Android and iOs operating systems.
+                  </Typography>
+                  <Button
+                    variant="contained"
+                    size="large"
+                    color="secondary"
+                    disableElevation
+                    sx={{
+                      width: { lg: '50%', xs: '100%' },
+                      paddingTop: '1rem',
+                      paddingBottom: '1rem',
+                      fontSize: '18px'
+                    }}
+                  >
+                    Mobile App development
+                  </Button>
+                </Stack>
+              </Stack>
+            </TabPanel>
+            <TabPanel value={selectedTab} index={2}>
+              <Stack direction={{ lg: 'row', sm: 'column' }} spacing={2}>
+                <div style={{ width: '50%', height: '200px' }} />
+                <Stack spacing={2}>
+                  <Typography variant="h5" sx={{ fontWeight: 700 }}>
+                    Web App Development
+                  </Typography>
+                  <Typography variant="h5" sx={{ fontWeight: 400 }}>
+                    We create elite web applications that will help grow your
+                    business.
+                  </Typography>
+                  <Typography variant="h5" sx={{ fontWeight: 400 }}>
+                    <strong>Flexible:</strong> Web applications that can grow
+                    and expand with your business.
+                  </Typography>
+                  <Typography variant="h5" sx={{ fontWeight: 400 }}>
+                    <strong>Highly accessible:</strong> Web app that can be used
+                    an all browsers and every OS.
+                  </Typography>
+                  <Button
+                    variant="contained"
+                    size="large"
+                    color="secondary"
+                    disableElevation
+                    sx={{
+                      width: { lg: '50%', xs: '100%' },
+                      paddingTop: '1rem',
+                      paddingBottom: '1rem',
+                      fontSize: '18px'
+                    }}
+                  >
+                    Web App development
+                  </Button>
+                </Stack>
+              </Stack>
+            </TabPanel>
+            <TabPanel value={selectedTab} index={3}>
+              <Stack direction={{ lg: 'row', sm: 'column' }} spacing={2}>
+                <div style={{ width: '50%', height: '200px' }} />
+                <Stack spacing={2}>
+                  <Typography variant="h5" sx={{ fontWeight: 700 }}>
+                    Agile Development Teams
+                  </Typography>
+                  <Typography variant="h5" sx={{ fontWeight: 400 }}>
+                    Hire great and managed development teams for every software
+                    need.
+                  </Typography>
+                  <Typography variant="h5" sx={{ fontWeight: 400 }}>
+                    <strong>More capability:</strong> Hire external teams that
+                    fit right into your business. Helping you reach your goals.
+                  </Typography>
+                  <Typography variant="h5" sx={{ fontWeight: 400 }}>
+                    <strong>Agile:</strong> A team that is able to scale with
+                    your projects.
+                  </Typography>
+                  <Button
+                    variant="contained"
+                    size="large"
+                    color="secondary"
+                    disableElevation
+                    sx={{
+                      width: { lg: '50%', xs: '100%' },
+                      paddingTop: '1rem',
+                      paddingBottom: '1rem',
+                      fontSize: '18px'
+                    }}
+                  >
+                    Development teams
+                  </Button>
+                </Stack>
+              </Stack>
+            </TabPanel>
+          </Grid>
         </Grid>
       </Grid>
 
@@ -836,6 +603,7 @@ const Home = () => {
         md={12}
         justifyContent={'space-between'}
         color={'white'}
+        sx={{ gap: { lg: '0rem', sm: '1rem', xs: '1rem' } }}
         bgcolor={'#122c34'}
       >
         {/*title*/}
@@ -844,7 +612,7 @@ const Home = () => {
           justifyContent={'space-between'}
           alignItems={'left'}
           direction={'column'}
-          p={'100px'}
+          p={'2rem'}
         >
           <Typography variant="h3" p={'10px'}>
             We provide expert software solutions
@@ -858,8 +626,9 @@ const Home = () => {
           container
           direction={'row'}
           alignItems={'right'}
-          justifyContent={'end'}
+          justifyContent={'flex-end'}
           color={'black'}
+          spacing={4}
           // border={'1px solid black'}
         >
           <Grid item md={6} container direction={'row'}>
@@ -874,7 +643,7 @@ const Home = () => {
                 p: '35px'
               }}
             >
-              <Grid padding={'10px'}>
+              <Grid item padding={'10px'}>
                 {' '}
                 <LaptopIcon sx={{ fontSize: '80px' }} />
               </Grid>
@@ -933,44 +702,51 @@ const Home = () => {
         <Grid
           container
           direction={'row'}
-          alignItems={'right'}
-          justifyContent={'end'}
+          alignItems={'flex-end'}
+          justifyContent={'space-between'}
           color={'black'}
           marginBottom={'80px'}
         >
-          {' '}
-          {/**Button grid */}
-          <Link
-            href="#"
-            underline="none"
-            color={'white'}
-            sx={{
-              // backgroundColor: 'red',
-              marginRight: 'auto',
-              marginTop: 'auto',
-              width: 'auto',
-              display: 'flex',
-              flexDirection: 'row',
-              height: '50px',
-              marginLeft: '80px',
-              padding: '10px',
-              borderBottom: '1px solid white',
-              cursor: 'pointer'
-            }}
-          >
-            <Box
+          <Grid item md={2} order={isMobile ? 2 : 1}>
+            <Link
+              href="/contact-us"
+              underline="none"
+              color={'white'}
               sx={{
+                // backgroundColor: 'red',
+                marginRight: 'auto',
+                marginTop: 'auto',
+                width: 'auto',
                 display: 'flex',
                 flexDirection: 'row',
-                alignItems: 'center',
-                gap: 2
+                height: '50px',
+                marginLeft: '80px',
+                padding: '10px',
+                borderBottom: '1px solid white',
+                cursor: 'pointer'
               }}
             >
-              <Typography variant="h5">Start a project</Typography>
-              <ArrowForwardIcon sx={{ fontSize: '50px', color: 'white' }} />
-            </Box>
-          </Link>
-          <Grid item md={6} container direction={'row'}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  gap: 2
+                }}
+              >
+                <Typography variant="h5">Start a project</Typography>
+                <ArrowForwardIcon sx={{ fontSize: '50px', color: 'white' }} />
+              </Box>
+            </Link>
+          </Grid>
+
+          <Grid
+            item
+            md={6}
+            container
+            direction={'row'}
+            order={isMobile ? 1 : 2}
+          >
             <Box
               sx={{
                 width: '100%',
@@ -1005,217 +781,75 @@ const Home = () => {
         md={12}
         direction={'column'}
         alignItems={'left'}
-        p={'100px'}
+        spacing={2}
+        p={'3rem'}
       >
-        <Typography variant="h2" fontWeight={700}>
-          FAQ
-        </Typography>
-        <Typography variant="h5" fontWeight={100} pt={'50px'} pb={'50px'}>
-          Again I have to write stupid text to fill in the time and everything.
-          This is everything that goes away and moves time forward
-        </Typography>
-
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography fontWeight={700}>
-              1 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography>
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget.
-            </Typography>
-            <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget.
-            </Typography>
-            <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget.
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
-
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography fontWeight={700}>
-              2. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget.
-            </Typography>
-            <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget.
-            </Typography>
-            <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget.
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
-
-        <Accordion sx={{}}>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography fontWeight={700}>
-              3. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget.
-            </Typography>
-            <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget.
-            </Typography>
-            <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget.
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
-
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography fontWeight={700}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget.
-            </Typography>
-            <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget.
-            </Typography>
-            <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget.
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
-
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography fontWeight={700}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget.
-            </Typography>
-            <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget.
-            </Typography>
-            <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget.
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
-
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography fontWeight={700}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget.
-            </Typography>
-            <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget.
-            </Typography>
-            <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget.
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
+        <Grid item md={12}>
+          <Typography variant="h2" fontWeight={700}>
+            FAQ
+          </Typography>
+        </Grid>
+        <Grid item md={12}>
+          <Typography variant="h5" fontWeight={100} pt={'50px'} pb={'50px'}>
+            Below are some of the frequently asked questions(FAQs) normally
+            asked by customers
+          </Typography>
+        </Grid>
+        <Grid item md={12}>
+          {FAQs.map((FAQ, index) => (
+            <Accordion
+              key={index}
+              elevation={0}
+              expanded={expanded === FAQ.panel}
+              onChange={handleOpen(FAQ.panel)}
+            >
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls={`${FAQ.panel}a-header`}
+                id={`${FAQ.panel}a-header`}
+              >
+                <Typography fontWeight={700} variant="h4">
+                  {FAQ.question}
+                </Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Typography variant="h5" fontWeight={400}>
+                  {FAQ.answer}
+                </Typography>
+              </AccordionDetails>
+            </Accordion>
+          ))}
+        </Grid>
       </Grid>
-
       {/* Get started section**/}
       <Grid
         container
         direction={'row'}
-        p={'100px'}
+        sx={{ padding: { lg: '4rem', sm: '2rem', xs: '1.5rem' } }}
         bgcolor={'#122c34'}
         color={'white'}
         justifyContent={'space-between'}
         alignItems={'center'}
       >
-        <Grid item>
-          {' '}
+        <Grid item md={8} sm={12} xs={12}>
           <Typography variant="h2" fontWeight={700}>
             Build your solution today
           </Typography>
         </Grid>
-        <Grid item>
+        <Grid item md={4} sm={12} xs={12}>
           <Button
             variant="contained"
+            fullWidth
             sx={{
               backgroundColor: '#ee8434',
               boxShadow: 0,
               height: '70px',
-              width: '390px',
               fontSize: '22px',
               marginBottom: '10px',
-              marginTop: '30px'
+              marginTop: '30px',
+              '&:hover': {
+                backgroundColor: 'darkorange'
+              }
             }}
           >
             Get Started

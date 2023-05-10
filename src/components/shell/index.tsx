@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react';
 import Footer from './footer';
+import NavigationBar from './navigation-bar';
 
 interface IProps {
   children: ReactNode;
@@ -14,6 +15,7 @@ const Shell = ({ children }: IProps) => {
         justifyContent: 'space-between'
       }}
     >
+      <NavigationBar />
       {children}
       <Footer />
     </div>
