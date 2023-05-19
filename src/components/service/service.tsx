@@ -1,9 +1,13 @@
 import { Button, Grid, Typography } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { ServiceProps } from './service_props';
 
-import React from 'react';
+const Service = (services: ServiceProps) => {
+  const matchedService = services.serviceContent.find(
+    (service: { id: number }) => service.id === 5
+  );
 
-function Service() {
+  console.log(matchedService);
   return (
     <>
       <Grid
@@ -20,7 +24,7 @@ function Service() {
 
         <Grid item md={4} direction={'column'}>
           <Typography variant="h2" fontWeight={'700'}>
-            Custom Software Development
+            {matchedService?.title}
           </Typography>
           <Typography variant="body1" pt={'50px'}>
             Lorem ipsum dolor sit amet consectetur. Sollicitudin justo et arcu
@@ -180,6 +184,6 @@ function Service() {
       </Grid>
     </>
   );
-}
+};
 
 export default Service;

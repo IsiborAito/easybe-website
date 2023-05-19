@@ -1,10 +1,12 @@
 import React from 'react';
 import './App.css';
 import Shell from './components/shell/shell';
-import { ReactLocation, Route, Router } from '@tanstack/react-location'
+import { ReactLocation, Route, Router } from '@tanstack/react-location';
 import Home from './components/home/home';
+import ServiceDescription from './components/service/serviceDescription';
+import NavigationBar from './components/shell/navigation-bar';
 
-const location = new ReactLocation({})
+const location = new ReactLocation({});
 
 const routes: Route[] = [
   {
@@ -19,8 +21,7 @@ const routes: Route[] = [
         children: [
           {
             path: '/',
-            element: <h1>Service</h1>
-            // <Service />
+            element: <ServiceDescription />
           },
           {
             path: 'serviceDescription',
@@ -31,7 +32,7 @@ const routes: Route[] = [
       },
       {
         path: '/about-us',
-        element:<h1>About Us</h1>
+        element: <h1>About Us</h1>
         //  <AboutUs />
       },
       {
@@ -66,13 +67,14 @@ const routes: Route[] = [
       }
     ]
   }
-]
-
+];
 
 function App() {
   return (
     <Router location={location} routes={routes}>
-      <Shell/>
+      <NavigationBar />
+      {/* <Outlet /> */}
+      <Shell />
     </Router>
   );
 }

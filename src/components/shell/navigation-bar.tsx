@@ -169,7 +169,7 @@ function NavigationBar() {
             </>
           )}
           <StyledMenuLink>
-            <StyledLinks href="#">EasyBe</StyledLinks>
+            <StyledLinks href={'/'}>EasyBe</StyledLinks>
             <Box
               sx={{
                 display: 'flex',
