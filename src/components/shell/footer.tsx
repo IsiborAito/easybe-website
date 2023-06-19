@@ -1,37 +1,38 @@
 import React from 'react';
 import { Link } from '@tanstack/react-location';
-import { Grid, Button, Stack, Typography, Divider } from '@mui/material';
+import { Grid, Stack, Typography, Divider } from '@mui/material';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import LinkButton from '../../utilities/LinkButton';
 
 const firstSectionLinks = [
   {
     text: 'Software development',
-    path: '/'
+    path: '/software-development'
   },
   {
     text: 'Mobile app development',
-    path: '/'
+    path: '/mobile-development'
   },
   {
     text: 'Web app development',
-    path: '/'
+    path: '/web-development'
   },
   {
-    text: 'Software support',
-    path: '/'
+    text: 'Software maintenance',
+    path: '/software-maintenance'
   },
   {
     text: 'Staff augmentation',
-    path: '/'
-  },
-  {
-    text: 'Software outsourcing',
-    path: '/'
+    path: '/staff-augmentation'
   },
   {
     text: 'Development teams',
-    path: '/'
+    path: '/hire-development-teams'
+  },
+  {
+    text: 'Cybersecurity consultancy',
+    path: '/cybersecurity-consultancy'
   },
   {
     text: 'Our rates',
@@ -100,20 +101,14 @@ const Footer = () => {
               builds, deploys and maintains web and mobile applications, that
               help businesses and start-ups become prosperous.
             </Typography>
-            <Button
+            <LinkButton
               variant="contained"
               size="large"
               disableElevation
-              sx={{
-                backgroundColor: '#FFFD82',
-                color: '#122C34',
-                '&:hover': {
-                  backgroundColor: '#E2E06E'
-                }
-              }}
-            >
-              Get Started
-            </Button>
+              color="secondary"
+              text="Get Started"
+              link="/contact-us"
+            />
           </Stack>
         </Grid>
         <Grid item md={6} sm={12} container justifyContent={'space-between'}>

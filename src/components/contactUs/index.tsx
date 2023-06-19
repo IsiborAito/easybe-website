@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   Grid,
   Stack,
@@ -13,6 +13,7 @@ import SendIcon from '@mui/icons-material/Send';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
+import { EasyBeContext, IContextProps } from '../../utilities/context';
 
 const companySize = [
   '1 - 25',
@@ -43,8 +44,7 @@ interface IFormInputs {
 
 const Contact = () => {
   const { handleSubmit, control, reset } = useForm<IFormInputs>();
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const { isMobile } = useContext(EasyBeContext) as IContextProps;
 
   const onSubmit: SubmitHandler<IFormInputs> = (data) => {
     console.log(data);
@@ -207,8 +207,8 @@ const Contact = () => {
                           <TextField
                             select
                             label="Company Size"
-                            defaultValue="Please Select"
                             variant="outlined"
+                            defaultValue={'1 - 25'}
                             fullWidth
                             onChange={onChange}
                             value={value}
@@ -228,7 +228,7 @@ const Contact = () => {
                       <Controller
                         control={control}
                         name="service"
-                        rules={{ required: 'WHat service do you want?' }}
+                        rules={{ required: 'What service do you want?' }}
                         render={({
                           field: { onChange, value },
                           fieldState: { error }
@@ -236,7 +236,6 @@ const Contact = () => {
                           <TextField
                             select
                             label="What service are you looking for?"
-                            defaultValue="Please Select"
                             variant="outlined"
                             fullWidth
                             onChange={onChange}

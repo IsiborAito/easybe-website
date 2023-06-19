@@ -1,132 +1,77 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
-import Box from '@mui/material/Box';
+import { useNavigate } from '@tanstack/react-location';
 import {
   AppBar,
   Button,
   Link,
-  Popper,
   Toolbar,
   Typography,
   styled,
-  IconButton,
-  Drawer,
-  useMediaQuery,
-  useTheme,
-  MenuItem
+  LinkProps,
+  Menu,
+  MenuItem,
+  ListItemIcon,
+  Stack,
+  ListItemText,
+  useScrollTrigger,
+  Box
 } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
+import MobileMenu from './mobileMenu';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { EasyBeContext, IContextProps } from '../../utilities/context';
+import { services } from '../../utilities/data';
+import IconSwitch from '../../utilities/iconSwitch';
 
-const StyledAppBar = styled(AppBar)(({ theme }) => ({
-  position: 'static',
-  boxShadow: 'none',
-  [theme.breakpoints.down('lg')]: {
-    position: 'fixed',
-    zIndex: theme.zIndex.drawer + 1
-  }
-}));
-
-const StyledAppToolbar = styled(Toolbar)(({ theme }) => ({
-  height: '130px',
-  display: 'flex',
-  justifyContent: 'space-evenly',
-  backgroundColor: ' #122c34',
-  fontFamily: 'Space Grotesk, sans-serif',
-  fontSize: '20px',
-  fontWeight: 'normal',
-  textAlign: 'center',
-  lineHeight: 2.7,
-  [theme.breakpoints.down('lg')]: {
-    height: '80px'
-  }
-}));
-
-export const StyledLinks = styled(Link)(({ theme }) => ({
-  color: 'white',
-  textDecoration: 'none'
-}));
-
-const StyledMenuLink = styled(Box)(({ theme }) => ({
-  width: '45%',
-  //   backgroundColor:'grey',
-  color: 'white',
-  display: 'flex',
-  flexDirection: 'row',
-  justifyContent: 'space-evenly',
-  alignItems: 'center',
-  [theme.breakpoints.down('md')]: {
-    display: 'none'
-  },
-  [theme.breakpoints.down('lg')]: {
-    fontSize: '15px'
-  }
-}));
-const StyledContact = styled(Box)(({ theme }) => ({
-  width: 'auto',
-  // backgroundColor: 'black',
-  display: 'flex',
-  flexDirection: 'row',
-  justifyContent: 'right',
-  alignItems: 'right',
-  [theme.breakpoints.down('md')]: {
-    display: 'none'
-  },
-  [theme.breakpoints.down('lg')]: {
-    fontSize: '15px'
-  }
-}));
-
-interface MobileMenuProps {
-  open: HTMLElement | null;
-  onClose: () => void;
+interface Props {
+  children: React.ReactElement;
 }
 
-const MobileMenu = ({ open, onClose }: MobileMenuProps) => (
-  <Drawer anchor="top" open={Boolean(open)} onClose={onClose}>
-    <Box
-      sx={{ width: 'auto', marginTop: '100px' }}
-      role="presentation"
-      onClick={onClose}
-      onKeyDown={onClose}
-    >
-      <MenuItem>
-        <Link href="#">EasyBe</Link>
-      </MenuItem>
+const ElevationScroll = (props: Props) => {
+  const { children } = props;
+  const trigger = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: 0
+  });
 
-      <MenuItem>
-        <Link href="#">Services</Link>
-      </MenuItem>
-      <MenuItem>
-        <Link href="#">Clients</Link>
-      </MenuItem>
+  return React.cloneElement(children, {
+    elevation: trigger ? 4 : 0
+  });
+};
 
-      <MenuItem>
-        <Link href="#">About Us</Link>
-      </MenuItem>
-    </Box>
-  </Drawer>
-);
+const StyledLinks = styled(Link)<LinkProps>(({ theme }) => ({
+  textDecoration: 'none',
+  cursor: 'pointer'
+}));
 
-function NavigationBar() {
+const StyledToolbar = styled(Toolbar)(({ theme }) => ({
+  alignItems: 'center',
+  paddingTop: theme.spacing(2),
+  paddingBottom: theme.spacing(3),
+  paddingLeft: '6rem',
+  paddingRight: '6rem',
+  [theme.breakpoints.down('md')]: {
+    paddingRight: '0.5rem',
+    paddingLeft: '0.5rem',
+    paddingBottom: theme.spacing(1)
+  }
+}));
+
+export interface IBar {
+  barColor: string;
+  textColor: string;
+}
+
+const NavigationBar = ({ barColor, textColor }: IBar) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [anchorEl2, setAnchorEl2] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
-  const open2 = Boolean(anchorEl2);
-  const id = open ? 'simple-popper' : undefined;
-  const id2 = open2 ? 'simple-popper' : undefined;
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
-  const [mobileMenuAnchorEl, setMobileMenuAnchorEl] =
-    React.useState<null | HTMLElement>(null);
+  const { isMobile } = React.useContext(EasyBeContext) as IContextProps;
 
-  const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setMobileMenuAnchorEl(event.currentTarget);
-  };
+  const navigate = useNavigate();
 
-  const handleMobileMenuClose = () => {
-    setMobileMenuAnchorEl(null);
+  const goToLink = (link: string) => {
+    navigate({ to: link, replace: false });
   };
 
   const handleOpen = (event: React.MouseEvent<HTMLElement>) => {
@@ -137,222 +82,130 @@ function NavigationBar() {
     setAnchorEl(null);
   };
 
-  const handleOpen2 = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl2(event.currentTarget);
-  };
-
-  const handleClose2 = () => {
-    setAnchorEl2(null);
-  };
-
-  return (
+  const regularAppBar = () => (
     <>
-      <StyledAppBar>
-        <StyledAppToolbar>
-          <Typography>Logo</Typography>
-          {isMobile && (
-            <>
-              <IconButton
-                sx={{ marginLeft: 'auto' }}
-                size="large"
-                edge="start"
-                color="inherit"
-                aria-label="menu"
-                onClick={handleMobileMenuOpen}
-              >
-                <MenuIcon />
-              </IconButton>
-              <MobileMenu
-                open={mobileMenuAnchorEl}
-                onClose={handleMobileMenuClose}
-              />
-            </>
-          )}
-          <StyledMenuLink>
-            <StyledLinks href="#">EasyBe</StyledLinks>
-            <Box
+      <Link href="/" sx={{ width: '30%', textDecoration: 'none' }}>
+        <img
+          width="50%"
+          height="auto"
+          src={
+            barColor === '#122C34'
+              ? 'https://res.cloudinary.com/purenelle/image/upload/v1683386712/Easybe/EasyBe_sfmjbi.png'
+              : 'https://res.cloudinary.com/purenelle/image/upload/v1683388038/Easybe/easybe_logo_dark_tbiukr.png'
+          }
+          alt="Home link"
+        />
+      </Link>
+      <Stack
+        justifyContent="space-between"
+        alignItems="center"
+        direction="row"
+        sx={{ flexGrow: 1 }}
+      >
+        <Stack
+          direction="row"
+          justifyContent={'space-evenly'}
+          alignItems="center"
+          sx={{ flexGrow: 1 }}
+        >
+          <StyledLinks href="/why-us">
+            <Typography variant="h6" sx={{ color: textColor }}>
+              Why Us?
+            </Typography>
+          </StyledLinks>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center'
+            }}
+          >
+            <StyledLinks
+              href="#"
+              onMouseOver={handleOpen}
+              sx={{ display: 'inline-flex', alignItems: 'center' }}
+            >
+              <>
+                <Typography variant="h6" sx={{ color: textColor }}>
+                  Services
+                </Typography>
+                <KeyboardArrowDownIcon sx={{ color: textColor }} />
+              </>
+            </StyledLinks>
+            <Menu
+              id="services-menu"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              MenuListProps={{
+                onMouseLeave: handleClose
+              }}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'center'
+              }}
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'center'
+              }}
               sx={{
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                alignItems: 'center'
+                '& .MuiList-root': {
+                  display: 'flex',
+                  padding: '20px',
+                  flexWrap: 'wrap',
+                  maxWidth: '720px',
+                  justifyContent: 'space-around'
+                }
               }}
             >
-              <StyledLinks href="#" onMouseOver={handleOpen}>
-                Services
-              </StyledLinks>
-              <KeyboardArrowDownIcon />
-
-              <Popper
-                onMouseLeave={handleClose}
-                id={id}
-                open={open}
-                anchorEl={anchorEl}
-              >
-                <Box
-                  sx={{
-                    borderRadius: '10px',
-                    border: '1px solid red',
-                    bgcolor: 'background.paper',
-                    width: '800px',
-                    height: 'fit-content',
-                    display: 'flex',
-                    flexDirection: 'row',
-                    flexWrap: 'wrap',
-                    m: '50px'
-                  }}
+              {services.map(({ service, link }) => (
+                <MenuItem
+                  key={service}
+                  onClick={() => goToLink(link)}
+                  sx={{ flexBasis: '50%' }}
                 >
-                  <Box sx={{ width: '25%', padding: '20px' }}>
-                    <Typography variant="h6" gutterBottom>
-                      Category 1
-                    </Typography>
-                    <ul>
-                      <li>
-                        <a href="#">Link 1</a>
-                      </li>
-                      <li>
-                        <a href="#">Link 2</a>
-                      </li>
-                      <li>
-                        <a href="#">Link 3</a>
-                      </li>
-                    </ul>
-                  </Box>
-                  <Box sx={{ width: '25%', padding: '20px' }}>
-                    <Typography variant="h6" gutterBottom>
-                      Category 2
-                    </Typography>
-                    <ul>
-                      <li>
-                        <a href="#">Link 1</a>
-                      </li>
-                      <li>
-                        <a href="#">Link 2</a>
-                      </li>
-                      <li>
-                        <a href="#">Link 3</a>
-                      </li>
-                    </ul>
-                  </Box>
-                  <Box sx={{ width: '25%', padding: '20px' }}>
-                    <Typography variant="h6" gutterBottom>
-                      Category 3
-                    </Typography>
-                    <ul>
-                      <li>
-                        <a href="#">Link 1</a>
-                      </li>
-                      <li>
-                        <a href="#">Link 2</a>
-                      </li>
-                      <li>
-                        <a href="#">Link 3</a>
-                      </li>
-                    </ul>
-                  </Box>
-                  <Box sx={{ width: '25%', padding: '20px' }}>
-                    <Typography variant="h6" gutterBottom>
-                      Category 4
-                    </Typography>
-                    <ul>
-                      <li>
-                        <a href="#">Link 1</a>
-                      </li>
-                      <li>
-                        <a href="#">Link 2</a>
-                      </li>
-                      <li>
-                        <a href="#">Link 3</a>
-                      </li>
-                    </ul>
-                  </Box>
-                  <Box sx={{ width: '25%', padding: '20px' }}>
-                    <Typography variant="h6" gutterBottom>
-                      Category 4
-                    </Typography>
-                    <ul>
-                      <li>
-                        <a href="#">Link 1</a>
-                      </li>
-                      <li>
-                        <a href="#">Link 2</a>
-                      </li>
-                      <li>
-                        <a href="#">Link 3</a>
-                      </li>
-                    </ul>
-                  </Box>
-                  <Box sx={{ width: '25%', padding: '20px' }}>
-                    <Typography variant="h6" gutterBottom>
-                      Category 4
-                    </Typography>
-                    <ul>
-                      <li>
-                        <a href="#">Link 1</a>
-                      </li>
-                      <li>
-                        <a href="#">Link 2</a>
-                      </li>
-                      <li>
-                        <a href="#">Link 3</a>
-                      </li>
-                    </ul>
-                  </Box>
-                </Box>
-              </Popper>
-            </Box>
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                alignItems: 'center'
-              }}
-            >
-              <StyledLinks
-                href="#"
-                onMouseOver={handleOpen2}
-                onMouseLeave={handleClose2}
-              >
-                Clients
-              </StyledLinks>
-              <KeyboardArrowDownIcon />
-              <Popper
-                id={id2}
-                open={open2}
-                anchorEl={anchorEl2}
-                onMouseLeave={handleClose2}
-              >
-                <Box
-                  sx={{
-                    border: 1,
-                    p: 1,
-                    bgcolor: 'background.paper',
-                    width: '350px',
-                    height: '200px',
-                    m: '50px'
-                  }}
-                >
-                  The content of the Popper.
-                </Box>
-              </Popper>
-            </Box>
-            <StyledLinks href="#">About us</StyledLinks>
-          </StyledMenuLink>
-          <StyledContact>
-            <Button
-              variant="contained"
-              sx={{ backgroundColor: '#fffd82', boxShadow: 0, color: 'black' }}
-            >
-              Get Started
-            </Button>
-          </StyledContact>
-        </StyledAppToolbar>
-      </StyledAppBar>
+                  <ListItemIcon>
+                    <IconSwitch iconName={service} />
+                  </ListItemIcon>
+                  <ListItemText>{service}</ListItemText>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
+          <StyledLinks href="/clients">
+            <Typography variant="h6" sx={{ color: textColor }}>
+              Clients
+            </Typography>
+          </StyledLinks>
+          <StyledLinks href="/about-us">
+            <Typography variant="h6" sx={{ color: textColor }}>
+              About Us
+            </Typography>
+          </StyledLinks>
+        </Stack>
+        <Button
+          variant="contained"
+          color="secondary"
+          sx={{
+            boxShadow: 0,
+            height: '3rem'
+          }}
+        >
+          Get Started
+        </Button>
+      </Stack>
     </>
-
-    // </Box>
   );
-}
+  return (
+    <ElevationScroll>
+      <AppBar sx={{ backgroundColor: barColor }}>
+        <StyledToolbar>
+          {isMobile ? <MobileMenu textColor={textColor} /> : regularAppBar()}
+        </StyledToolbar>
+      </AppBar>
+    </ElevationScroll>
+  );
+};
 
 export default NavigationBar;

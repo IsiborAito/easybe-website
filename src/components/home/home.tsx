@@ -1,7 +1,6 @@
 /* eslint-disable no-lone-blocks */
 import {
   Box,
-  Button,
   styled,
   Grid,
   Typography,
@@ -11,11 +10,11 @@ import {
   AccordionSummary,
   AccordionDetails,
   Link,
+  Button,
   Stack
 } from '@mui/material';
-import React from 'react';
-import { useTheme } from '@mui/material/styles';
-import useMediaQuery from '@mui/material/useMediaQuery';
+import React, { useContext } from 'react';
+import { EasyBeContext } from '../../utilities/context';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
@@ -25,7 +24,7 @@ import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { FAQs, TabPanels } from '../../utilities/data';
-import { useNavigate } from '@tanstack/react-location';
+import LinkButton from '../../utilities/LinkButton';
 // import required modules
 
 {
@@ -66,6 +65,7 @@ const MainDiv = styled(Box)(({ theme }) => ({
   fontWeight: 'bold',
   justifyContent: 'space-evenly',
   alignItems: 'center',
+  marginTop: '4rem',
   [theme.breakpoints.down('lg')]: {
     flexDirection: 'column',
     gap: 5
@@ -78,25 +78,6 @@ const MainDiv = styled(Box)(({ theme }) => ({
   }
 }));
 
-const TextBox = styled(Box)(({ theme }) => ({
-  height: 'fit-content',
-  // backgroundColor: '#1ff',
-  position: 'relative',
-  color: 'white',
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'space-evenly',
-  alignItems: 'flex-start',
-  marginBottom: '10px',
-  [theme.breakpoints.down('lg')]: {
-    marginTop: '15px',
-    fontSize: '15px'
-  },
-  [theme.breakpoints.down('md')]: {
-    marginTop: '15px'
-    // fontSize: '15px'
-  }
-}));
 const ImageBox = styled(Box)(({ theme }) => ({
   width: '100%',
   height: '600px',
@@ -118,8 +99,7 @@ const ImageBox = styled(Box)(({ theme }) => ({
 const Home = () => {
   const [selectedTab, setselectedTab] = React.useState(0);
   const [expanded, setExpanded] = React.useState<string | false>(false);
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const { isMobile } = useContext(EasyBeContext)!;
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setselectedTab(newValue);
@@ -128,12 +108,6 @@ const Home = () => {
     (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
       setExpanded(isExpanded ? panel : false);
     };
-
-  const navigate = useNavigate();
-  const handleNav = () => {
-    navigate({ to: '/contact-us', replace: false });
-    window.scrollTo(0, 0);
-  };
 
   const dataImg = [
     '/apple-logo.png',
@@ -191,7 +165,7 @@ const Home = () => {
       {/* Hero  section*/}
       <MainDiv>
         <Grid container justifyContent="space-evenly" alignItems="flex-start">
-          <Grid item md={7} sm={12} xs={12}>
+          <Grid item md={6} sm={12} xs={12}>
             <Stack>
               <Typography variant="h2" sx={{ fontWeight: 700 }}>
                 Transform your business with custom software
@@ -213,7 +187,6 @@ const Home = () => {
               </Typography>
               <Button
                 variant="contained"
-                onClick={handleNav}
                 sx={{
                   backgroundColor: '#ee8434',
                   boxShadow: 0,
@@ -231,6 +204,7 @@ const Home = () => {
               </Button>
             </Stack>
           </Grid>
+          <Grid item md={1}></Grid>
           <Grid item md={5} sm={12} xs={12}>
             <ImageBox>Box 2</ImageBox>
           </Grid>
@@ -242,11 +216,10 @@ const Home = () => {
         sx={{ padding: { lg: '100px', sm: '50px', xs: '40px' } }}
         container
         spacing={3}
-        md={12}
         alignItems={'center'}
       >
-        <Grid item md={5} lg={5}>
-          <Typography variant="h4" align={isMobile ? 'center' : 'left'}>
+        <Grid item md={12} lg={12}>
+          <Typography variant="h4" align="center" gutterBottom>
             Proficient in a range of software development technologies
           </Typography>
         </Grid>
@@ -260,8 +233,8 @@ const Home = () => {
           sx={{ position: 'relative' }}
         >
           <Slider {...settings}>
-            {dataImg.map((data) => (
-              <Box sx={{}}>
+            {dataImg.map((data, index) => (
+              <Box key={index} sx={{}}>
                 <Box
                   sx={{
                     backgroundColor: '#f2c6a4',
@@ -290,11 +263,19 @@ const Home = () => {
             ))}
           </Slider>
         </Grid>
-        <Grid item md={2} lg={2} sm={4} xs={5}>
+        <Grid
+          item
+          md={2}
+          lg={2}
+          sm={4}
+          xs={5}
+          container
+          justifyContent="center"
+          alignItems="center"
+        >
           <Button
             variant="contained"
             disableElevation
-            onClick={handleNav}
             sx={{
               backgroundColor: '#FFFD82',
               height: { sm: '50px', md: '60px', lg: '70px' },
@@ -364,10 +345,8 @@ const Home = () => {
       {/* OUR expert SERVICES Section */}
       <Grid
         direction={'column'}
-        md={12}
         container
         justifyContent={'space-between'}
-        sm={12}
         alignItems={{
           md: 'center',
           sm: 'flex-start',
@@ -395,13 +374,7 @@ const Home = () => {
             </Typography>
           </Stack>
         </Grid>
-        <Grid
-          direction={'row'}
-          item
-          container
-          md={12}
-          sx={{ width: { sm: '100%', xs: '100%' } }}
-        >
+        <Grid item container md={12} sx={{ width: { sm: '100%', xs: '100%' } }}>
           <Grid item md={2} sm={12}>
             <Tabs
               orientation={isMobile ? 'horizontal' : 'vertical'}
@@ -481,7 +454,6 @@ const Home = () => {
       <Grid
         direction={'column'}
         container
-        md={12}
         justifyContent={'space-between'}
         color={'white'}
         sx={{ gap: { lg: '0rem', sm: '1rem', xs: '1rem' } }}
@@ -492,7 +464,6 @@ const Home = () => {
           item
           justifyContent={'space-between'}
           alignItems={'left'}
-          direction={'column'}
           p={'2rem'}
         >
           <Typography variant="h3" p={'10px'}>
@@ -512,7 +483,7 @@ const Home = () => {
           spacing={4}
           // border={'1px solid black'}
         >
-          <Grid item md={6} container direction={'row'}>
+          <Grid item md={6} container>
             <Box
               sx={{
                 width: '100%',
@@ -528,7 +499,7 @@ const Home = () => {
                 {' '}
                 <LaptopIcon sx={{ fontSize: '80px' }} />
               </Grid>
-              <Grid direction={'column'} padding={' 0px 20px'}>
+              <Grid item container direction={'column'} padding={' 0px 20px'}>
                 <Typography variant="h4" fontWeight={'700'}>
                   Industry Experience
                 </Typography>
@@ -563,7 +534,7 @@ const Home = () => {
               <Grid padding={'10px'}>
                 <GroupIcon sx={{ fontSize: '80px' }} />
               </Grid>
-              <Grid direction={'column'} padding={' 0px 20px'}>
+              <Grid item container direction={'column'} padding={' 0px 20px'}>
                 <Typography variant="h4" fontWeight={'700'}>
                   Team of developers
                 </Typography>
@@ -641,7 +612,7 @@ const Home = () => {
               <Grid padding={'10px'}>
                 <TrendingUpIcon sx={{ fontSize: '80px' }} />
               </Grid>
-              <Grid direction={'column'} padding={' 0px 20px'}>
+              <Grid item container direction={'column'} padding={' 0px 20px'}>
                 <Typography variant="h4" fontWeight={'700'}>
                   Project tracking
                 </Typography>
@@ -657,7 +628,6 @@ const Home = () => {
       {/*Frequently asked questions*/}
       <Grid
         container
-        md={12}
         direction={'column'}
         alignItems={'left'}
         spacing={2}
@@ -716,10 +686,11 @@ const Home = () => {
           </Typography>
         </Grid>
         <Grid item md={3} sm={12} xs={12}>
-          <Button
+          <LinkButton
             variant="contained"
             fullWidth
-            onClick={handleNav}
+            text="Get Started"
+            link="/contact-us"
             sx={{
               backgroundColor: '#ee8434',
               boxShadow: 0,
@@ -731,9 +702,7 @@ const Home = () => {
                 backgroundColor: 'darkorange'
               }
             }}
-          >
-            Get Started
-          </Button>
+          />
         </Grid>
       </Grid>
     </>
