@@ -10,8 +10,6 @@ import {
   MenuItem
 } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
-import { useTheme } from '@mui/material/styles';
-import useMediaQuery from '@mui/material/useMediaQuery';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { EasyBeContext, IContextProps } from '../../utilities/context';
 
@@ -60,7 +58,7 @@ const Contact = () => {
         justifyContent: 'flex-start',
         position: 'relative',
         gap: '8rem',
-        marginTop: isMobile ? '4rem' : '0rem'
+        marginTop: isMobile ? '4rem' : '2rem'
       }}
     >
       <div

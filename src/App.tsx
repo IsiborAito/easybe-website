@@ -9,6 +9,7 @@ import Service from './components/services';
 import { ReactLocation, Route, Router } from '@tanstack/react-location';
 import Home from './components/home/home';
 import theme from './theme';
+import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, useTheme } from '@mui/material/styles';
 import { EasyBeContext } from './utilities/context';
 import { useMediaQuery } from '@mui/material';
@@ -148,6 +149,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
+      <CssBaseline />
       <EasyBeContext.Provider value={{ isMobile, currLocation }}>
         <Router location={location} routes={routes} />
       </EasyBeContext.Provider>

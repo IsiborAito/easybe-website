@@ -3,7 +3,6 @@ import React from 'react';
 import { useNavigate } from '@tanstack/react-location';
 import {
   AppBar,
-  Button,
   Link,
   Toolbar,
   Typography,
@@ -22,6 +21,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { EasyBeContext, IContextProps } from '../../utilities/context';
 import { services } from '../../utilities/data';
 import IconSwitch from '../../utilities/iconSwitch';
+import LinkButton from '../../utilities/LinkButton';
 
 interface Props {
   children: React.ReactElement;
@@ -184,16 +184,16 @@ const NavigationBar = ({ barColor, textColor }: IBar) => {
             </Typography>
           </StyledLinks>
         </Stack>
-        <Button
+        <LinkButton
           variant="contained"
           color="secondary"
           sx={{
             boxShadow: 0,
             height: '3rem'
           }}
-        >
-          Get Started
-        </Button>
+          link="/contact-us"
+          text="Get Started"
+        />
       </Stack>
     </>
   );

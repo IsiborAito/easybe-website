@@ -117,16 +117,12 @@ const Template = ({
                 text="Get in touch"
                 variant="contained"
                 size="large"
+                color="secondary"
                 icon={<ArrowForwardIcon />}
                 disableElevation
                 sx={{
-                  backgroundColor: '#FFFD82',
-                  color: '#122C34',
                   width: '50%',
-                  height: '4rem',
-                  '&:hover': {
-                    backgroundColor: 'yellow'
-                  }
+                  height: '4rem'
                 }}
               />
             </Stack>

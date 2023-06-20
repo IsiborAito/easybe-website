@@ -12,13 +12,14 @@ const RenderArrows = ({ direction, slider }: IRenderArrows) => {
   return (
     <ButtonBase
       sx={{
-        backgroundColor: '#FFFD82',
         height: '50px',
         width: '50px',
         display: 'flex',
         borderRadius: '50%',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        backgroundColor: '#EE8434',
+        color: 'white'
       }}
       onClick={() =>
         direction === 'forward'

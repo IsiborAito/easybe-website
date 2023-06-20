@@ -185,23 +185,20 @@ const Home = () => {
                 work closely with our clients to create software that meets
                 their specific requirements.
               </Typography>
-              <Button
+              <LinkButton
                 variant="contained"
+                color="secondary"
+                text="Get Started"
+                link="/contact-us"
                 sx={{
-                  backgroundColor: '#ee8434',
                   boxShadow: 0,
                   height: '70px',
                   width: isMobile ? '100%' : '190px',
                   fontSize: '22px',
                   marginBottom: '10px',
-                  marginTop: '30px',
-                  '&:hover': {
-                    backgroundColor: 'darkorange'
-                  }
+                  marginTop: '30px'
                 }}
-              >
-                Get Started
-              </Button>
+              />
             </Stack>
           </Grid>
           <Grid item md={1}></Grid>
@@ -273,24 +270,20 @@ const Home = () => {
           justifyContent="center"
           alignItems="center"
         >
-          <Button
+          <LinkButton
             variant="contained"
+            text="Get Started"
             disableElevation
+            link="/contact-us"
+            color="secondary"
             sx={{
-              backgroundColor: '#FFFD82',
               height: { sm: '50px', md: '60px', lg: '70px' },
               width: { sm: '100%', md: '150px', lg: '190px', xs: '100%' },
               fontSize: { sm: '15px', md: '15px', lg: '22px' },
               marginBottom: '10px',
-              marginTop: '30px',
-              color: '#122C34',
-              '&:hover': {
-                backgroundColor: 'yellow'
-              }
+              marginTop: '30px'
             }}
-          >
-            Get Started
-          </Button>
+          />
         </Grid>
       </Grid>
       {/* Why Choose Easybe? */}

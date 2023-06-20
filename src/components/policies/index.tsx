@@ -5,13 +5,10 @@ import {
   Typography,
   Stack,
   Divider,
-  Card,
-  CardActions,
-  Button
+  Box
 } from '@mui/material';
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
-import ListItemText from '@mui/material/ListItemText';
-import CardContent from '@mui/material/CardContent';
+import LinkButton from '../../utilities/LinkButton';
 
 const PolicyPage = () => {
   return (
@@ -141,44 +138,43 @@ const PolicyPage = () => {
           <Grid item md={12}>
             <div style={{ height: '300px' }} />
           </Grid>
-          <Grid item md={12}>
-            <Card
-              raised
-              sx={{
-                width: '100%',
-                backgroundColor: '#122C34',
-                paddingTop: '8rem',
-                paddingBottom: '8rem'
-              }}
-            >
-              <CardContent>
-                <Typography
-                  variant="h4"
-                  align="center"
-                  sx={{ fontWeight: 700, color: 'white' }}
-                >
-                  Begin your software project
-                </Typography>
-                <Typography
-                  variant="h5"
-                  align="center"
-                  sx={{ color: 'white', fontWeight: 400 }}
-                >
-                  with Easybe
-                </Typography>
-              </CardContent>
-              <CardActions sx={{ justifyContent: 'center' }}>
-                <Button variant="contained" size="large" disableElevation>
-                  Get started
-                </Button>
-              </CardActions>
-            </Card>
-          </Grid>
-          <Grid item md={12}>
-            <div style={{ height: '200px' }} />
-          </Grid>
         </Grid>
       </Container>
+      <Box
+        sx={{
+          backgroundColor: '#122C34',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          p: '4rem'
+        }}
+      >
+        <Stack spacing={2}>
+          <Typography
+            variant="h4"
+            align="center"
+            sx={{ fontWeight: 700, color: 'white' }}
+          >
+            Begin your software project
+          </Typography>
+          <Typography
+            variant="h5"
+            align="center"
+            sx={{ color: 'white', fontWeight: 400 }}
+          >
+            with Easybe
+          </Typography>
+          <LinkButton
+            variant="contained"
+            size="large"
+            disableElevation
+            color="secondary"
+            text="Get started"
+            link="/contact-us"
+            sx={{ height: '4rem', fontSize: '24px' }}
+          />
+        </Stack>
+      </Box>
     </div>
   );
 };

@@ -1,16 +1,7 @@
-import {
-  Box,
-  Button,
-  ButtonBase,
-  Grid,
-  Typography,
-  Stack
-} from '@mui/material';
+import { Box, Grid, Typography, Stack } from '@mui/material';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import React, { useContext } from 'react';
 import MessageIcon from '@mui/icons-material/Message';
 import GroupIcon from '@mui/icons-material/Group';
@@ -18,37 +9,12 @@ import GroupWorkIcon from '@mui/icons-material/GroupWork';
 import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
 import { dataImg } from '../../utilities/data';
 import { EasyBeContext, IContextProps } from '../../utilities/context';
+import RenderArrows from '../../utilities/renderArrows';
+import LinkButton from '../../utilities/LinkButton';
 
 function AboutUs() {
   const slider = React.useRef<any>(null);
   const { isMobile } = useContext(EasyBeContext) as IContextProps;
-
-  const renderArrows = (direction: string) => {
-    return (
-      <ButtonBase
-        sx={{
-          backgroundColor: '#FFFD82',
-          height: '50px',
-          width: '50px',
-          display: 'flex',
-          borderRadius: '50%',
-          alignItems: 'center',
-          justifyContent: 'center'
-        }}
-        onClick={() =>
-          direction === 'forward'
-            ? slider.current?.slickNext()
-            : slider.current?.slickPrev()
-        }
-      >
-        {direction === 'forward' ? (
-          <ArrowForwardIosIcon />
-        ) : (
-          <ArrowBackIosIcon />
-        )}
-      </ButtonBase>
-    );
-  };
 
   var settings = {
     className: 'center',
@@ -114,10 +80,12 @@ function AboutUs() {
               with world-class teams with elite experience providing
               <br /> various software services.
             </Typography>
-            <Button
+            <LinkButton
+              text="Start a project"
+              link="/contact-us"
+              color="secondary"
               variant="contained"
               sx={{
-                backgroundColor: '#ee8434',
                 boxShadow: 0,
                 height: '4rem',
                 width: { md: '40%', sm: '100%' },
@@ -125,9 +93,7 @@ function AboutUs() {
                 marginBottom: '10px',
                 marginTop: '30px'
               }}
-            >
-              Start a project
-            </Button>
+            />
           </Stack>
         </Grid>
         <Grid item md={4} sm={12} xs={12} bgcolor={'grey'} p={'25px'}>
@@ -240,7 +206,7 @@ function AboutUs() {
             paddingRight: { md: 0, sm: '0.5rem', xs: '0.25rem' }
           }}
         >
-          {renderArrows('backward')}
+          <RenderArrows direction="backward" slider={slider} />
         </Grid>
         <Grid
           item
@@ -298,7 +264,7 @@ function AboutUs() {
           container
           justifyContent={isMobile ? 'flex-start' : 'flex-end'}
         >
-          {renderArrows('forward')}
+          <RenderArrows direction="forward" slider={slider} />
         </Grid>
       </Grid>
       <Grid
@@ -387,22 +353,18 @@ function AboutUs() {
           </Grid>
         </Grid>
         <Grid item md={12} sm={12} xs={12} pt={isMobile ? '20px' : '100px'}>
-          <Button
+          <LinkButton
             variant="contained"
+            text="Contact us"
+            link="/contact-us"
+            color="secondary"
             sx={{
-              backgroundColor: '#fffd82',
               boxShadow: 0,
-              color: 'black',
               height: { xs: '50px', sm: '60px', md: '70px', lg: '80px' },
               width: { sm: '200px', xs: '150px', md: '250px', lg: '300px' },
-              fontSize: { sm: '12px', xs: '10px', md: '18px', lg: '22px' },
-              '&:hover': {
-                color: 'white'
-              }
+              fontSize: { sm: '12px', xs: '10px', md: '18px', lg: '22px' }
             }}
-          >
-            Contact us
-          </Button>
+          />
         </Grid>
       </Grid>
     </>
