@@ -1,6 +1,5 @@
 import React from 'react';
 import Template, { ITemplate } from './template';
-import { ServiceData } from '../../utilities/data';
 
 interface IService {
   service: ITemplate;

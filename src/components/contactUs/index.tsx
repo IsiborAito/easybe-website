@@ -41,7 +41,7 @@ interface IFormInputs {
 }
 
 const Contact = () => {
-  const { handleSubmit, control, reset } = useForm<IFormInputs>();
+  const { handleSubmit, control } = useForm<IFormInputs>();
   const { isMobile } = useContext(EasyBeContext) as IContextProps;
 
   const onSubmit: SubmitHandler<IFormInputs> = (data) => {

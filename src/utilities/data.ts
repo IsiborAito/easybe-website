@@ -42,7 +42,18 @@ export const FAQs = [
   }
 ];
 
-export const TabPanels = [
+interface ITabPanels {
+  title: string;
+  subtitle: string;
+  point1: string;
+  point1details: string;
+  point2: string;
+  point2details: string;
+  buttonText: string;
+  link: string;
+}
+
+export const TabPanels: ITabPanels[] = [
   {
     title: 'Custom Software Development',
     subtitle: `We create solutions for startups and enterprises with elite
@@ -53,7 +64,8 @@ export const TabPanels = [
     point2: 'Bespoke solutions:',
     point2details: `Tailor made software for
         all your business needs`,
-    buttonText: 'Software development'
+    buttonText: 'Software development',
+    link: '/software-development'
   },
   {
     title: 'Mobile App Development',
@@ -65,7 +77,8 @@ export const TabPanels = [
     point2: 'Cross platforms:',
     point2details: `We create mobile app
         application for both Android and iOs operating systems.`,
-    buttonText: 'Mobile App development'
+    buttonText: 'Mobile App development',
+    link: '/services/mobile-development'
   },
   {
     title: 'Web App Development',
@@ -77,7 +90,8 @@ export const TabPanels = [
     point2: 'Highly accessible:',
     point2details: `Web app that can be used
         an all browsers and every OS.`,
-    buttonText: 'Web App development'
+    buttonText: 'Web App development',
+    link: '/services/web-development'
   },
   {
     title: 'Agile Development Teams',
@@ -89,7 +103,19 @@ export const TabPanels = [
     point2: 'Agile:',
     point2details: `A team that is able to scale with
         your projects.`,
-    buttonText: 'Development teams'
+    buttonText: 'Development teams',
+    link: '/services/hire-development-teams'
+  },
+  {
+    title: 'Cybersecurity Consulting',
+    subtitle: `we offer comprehensive solutions to safeguard your valuable data and protect 
+    your organization from evolving cyber threats.`,
+    point1: 'Holistic Approach',
+    point1details: ` Our consultancy takes a holistic approach to cybersecurity. We analyze your organization's infrastructure, networks, applications, and data to provide a comprehensive evaluation of potential risks`,
+    point2: 'Proactive Threat Detection and Response',
+    point2details: ` In today's threat landscape, being reactive is not enough. Our cybersecurity consultancy emphasizes proactive threat detection and response.`,
+    buttonText: 'Cybersecurity Consulting',
+    link: '/cybersecurity-consultancy'
   }
 ];
 

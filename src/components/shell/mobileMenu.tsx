@@ -1,9 +1,9 @@
 import React from 'react';
+import { useNavigate } from '@tanstack/react-location';
 import {
   IconButton,
   Drawer,
   List,
-  ListItem,
   Box,
   Link,
   ListItemButton,
@@ -35,29 +35,20 @@ const MobileMenu = ({ textColor }: IMobileBar) => {
     setOpen(false);
   };
 
+  const navigate = useNavigate();
+
+  const goToLink = (link: string) => {
+    navigate({ to: link, replace: false });
+  };
+
   const toggleService = () => {
     setServiceOpen(!serviceOpen);
   };
 
-  const links = [
-    {
-      link: 'Why Easybe'
-    },
-    {
-      link: 'Services'
-    },
-    {
-      link: 'Clients'
-    },
-    {
-      link: 'About Us'
-    }
-  ];
-
   const list = () => (
     <Box sx={{ width: '75%' }} role="presentation" onClick={openDrawer}>
       <List>
-        <ListItemButton>
+        <ListItemButton onClick={() => goToLink('/why-easybe')}>
           <ListItemText primary={'Why Easybe'} />
         </ListItemButton>
         <ListItemButton onClick={toggleService}>
@@ -78,10 +69,10 @@ const MobileMenu = ({ textColor }: IMobileBar) => {
             ))}
           </List>
         </Collapse>
-        <ListItemButton>
+        <ListItemButton onClick={() => goToLink('/clients')}>
           <ListItemText primary="Clients" />
         </ListItemButton>
-        <ListItemButton>
+        <ListItemButton onClick={() => goToLink('/about-us')}>
           <ListItemText primary="About Us" />
         </ListItemButton>
       </List>

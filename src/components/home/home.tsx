@@ -10,7 +10,6 @@ import {
   AccordionSummary,
   AccordionDetails,
   Link,
-  Button,
   Stack
 } from '@mui/material';
 import React, { useContext } from 'react';
@@ -400,6 +399,11 @@ const Home = () => {
                 label="Development teams"
                 wrapped
               />
+              <Tab
+                sx={{ fontSize: { lg: '20px', sm: '14px' } }}
+                label="Cybersecurity consultancy"
+                wrapped
+              />
             </Tabs>
           </Grid>
           <Grid item md={1}></Grid>
@@ -422,7 +426,7 @@ const Home = () => {
                       <strong>{panel.point2}</strong>
                       {panel.point2details}
                     </Typography>
-                    <Button
+                    <LinkButton
                       variant="contained"
                       size="large"
                       color="secondary"
@@ -433,9 +437,9 @@ const Home = () => {
                         paddingTop: '1rem',
                         paddingBottom: '1rem'
                       }}
-                    >
-                      {panel.buttonText}
-                    </Button>
+                      text={panel.buttonText}
+                      link={panel.link}
+                    />
                   </Stack>
                 </Stack>
               </TabPanel>
