@@ -10,7 +10,8 @@ import {
   ListItemText,
   ListItemIcon,
   Button,
-  Collapse
+  Collapse,
+  Stack
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
@@ -60,7 +61,7 @@ const MobileMenu = ({ textColor }: IMobileBar) => {
         <Collapse in={serviceOpen} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
             {services.map((service) => (
-              <ListItemButton sx={{ pl: 4 }}>
+              <ListItemButton key={service.service} sx={{ pl: 4 }}>
                 <ListItemIcon>
                   <IconSwitch iconName={service.service} />
                 </ListItemIcon>
@@ -89,31 +90,39 @@ const MobileMenu = ({ textColor }: IMobileBar) => {
 
   return (
     <React.Fragment>
-      {!open ? (
-        <IconButton
-          color="inherit"
-          aria-label="open drawer"
-          onClick={openDrawer}
-        >
-          <MenuIcon sx={{ color: textColor }} />
-        </IconButton>
-      ) : (
-        <IconButton
-          color="inherit"
-          aria-label="close drawer"
-          onClick={closeDrawer}
-        >
-          <CloseIcon sx={{ color: textColor }} />
-        </IconButton>
-      )}
-      <Link href="/">
-        <img
-          width="100px"
-          src="https://res.cloudinary.com/purenelle/image/upload/v1686858609/mobile-EasyBe_gkx1wm.png"
-          alt="mobile Easybe logo"
-          height="auto"
-        />
-      </Link>
+      <Stack
+        direction="row"
+        alignItems="center"
+        justifyContent="space-between"
+        sx={{ width: '100%' }}
+      >
+        {!open ? (
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={openDrawer}
+          >
+            <MenuIcon sx={{ color: textColor }} />
+          </IconButton>
+        ) : (
+          <IconButton
+            color="inherit"
+            aria-label="close drawer"
+            onClick={closeDrawer}
+          >
+            <CloseIcon sx={{ color: textColor }} />
+          </IconButton>
+        )}
+        <Link href="/">
+          <img
+            width="100px"
+            src="https://res.cloudinary.com/purenelle/image/upload/v1686858609/mobile-EasyBe_gkx1wm.png"
+            alt="mobile Easybe logo"
+            height="auto"
+          />
+        </Link>
+      </Stack>
+
       <Drawer
         variant="persistent"
         anchor="top"

@@ -164,17 +164,12 @@ const Home = () => {
       {/* Hero  section*/}
       <MainDiv>
         <Grid container justifyContent="space-evenly" alignItems="flex-start">
-          <Grid item md={6} sm={12} xs={12}>
-            <Stack>
+          <Grid item md={6} sm={12} xs={12} sx={{ order: isMobile ? 3 : 1 }}>
+            <Stack justifyContent="flex-start" spacing={2}>
               <Typography variant="h2" sx={{ fontWeight: 700 }}>
                 Transform your business with custom software
               </Typography>
-              <Typography
-                variant="subtitle2"
-                fontSize={'30px'}
-                paddingTop={' 3.5rem'}
-                paddingBottom={' 3.5rem'}
-              >
+              <Typography variant="h4">
                 Easybe : The easy choice for custom software
               </Typography>
               <Typography variant="h5" fontWeight={300}>
@@ -191,17 +186,17 @@ const Home = () => {
                 link="/contact-us"
                 sx={{
                   boxShadow: 0,
-                  height: '70px',
+                  height: '4rem',
                   width: isMobile ? '100%' : '190px',
-                  fontSize: '22px',
-                  marginBottom: '10px',
-                  marginTop: '30px'
+                  fontSize: '1.3rem',
+                  marginBottom: '0.5rem',
+                  marginTop: '1rem'
                 }}
               />
             </Stack>
           </Grid>
-          <Grid item md={1}></Grid>
-          <Grid item md={5} sm={12} xs={12}>
+          <Grid item md={1} sx={{ order: 2 }}></Grid>
+          <Grid item md={5} sm={12} xs={12} sx={{ order: isMobile ? 1 : 3 }}>
             <ImageBox>Box 2</ImageBox>
           </Grid>
         </Grid>
@@ -307,7 +302,7 @@ const Home = () => {
         </Grid>
 
         <Grid item md={4} sm={12} xs={12}>
-          <Typography variant="h2" sx={{ fontWeight: 700 }}>
+          <Typography variant="h3" sx={{ fontWeight: 700 }}>
             Easybe tailors software solutions to meet your business needs
           </Typography>
         </Grid>
@@ -315,7 +310,7 @@ const Home = () => {
           <div
             style={{
               width: isMobile ? '100%' : '2px',
-              height: isMobile ? '2px' : '100px',
+              height: isMobile ? '2px' : '18rem',
               backgroundColor: 'white',
               display: 'inline-block'
             }}
@@ -323,7 +318,7 @@ const Home = () => {
         </Grid>
         <Grid item md={4} sm={12} xs={12}>
           <Stack justifyContent="flex-end">
-            <Typography variant="h5" align="left" sx={{ fontWeight: 400 }}>
+            <Typography variant="h6" align="left" sx={{ fontWeight: 400 }}>
               Our team of experienced software developers has expertise in a
               wide range of technologies and programming languages. <br />
               <br />
@@ -367,7 +362,7 @@ const Home = () => {
           </Stack>
         </Grid>
         <Grid item container md={12} sx={{ width: { sm: '100%', xs: '100%' } }}>
-          <Grid item md={2} sm={12}>
+          <Grid item md={2} sm={12} sx={{ overflow: 'hidden' }}>
             <Tabs
               orientation={isMobile ? 'horizontal' : 'vertical'}
               variant="scrollable"
@@ -463,7 +458,7 @@ const Home = () => {
           alignItems={'left'}
           p={'2rem'}
         >
-          <Typography variant="h3" p={'10px'}>
+          <Typography variant="h3" p={'10px'} fontWeight={700}>
             We provide expert software solutions
           </Typography>
           <Typography variant="h4" p={'10px'}>
@@ -556,7 +551,7 @@ const Home = () => {
           color={'black'}
           marginBottom={'80px'}
         >
-          <Grid item md={2} order={isMobile ? 2 : 1}>
+          <Grid item md={3} sm={2} order={isMobile ? 2 : 1}>
             <Link
               href="/contact-us"
               underline="none"
@@ -583,8 +578,8 @@ const Home = () => {
                   gap: 2
                 }}
               >
-                <Typography variant="h5">Start a project</Typography>
-                <ArrowForwardIcon sx={{ fontSize: '50px', color: 'white' }} />
+                <Typography variant="body1">Start a project</Typography>
+                <ArrowForwardIcon sx={{ fontSize: '1.5rem', color: 'white' }} />
               </Box>
             </Link>
           </Grid>
@@ -678,7 +673,7 @@ const Home = () => {
         alignItems={'center'}
       >
         <Grid item md={9} sm={12} xs={12}>
-          <Typography variant="h2" fontWeight={700}>
+          <Typography variant="h3" fontWeight={700}>
             Build your solution today
           </Typography>
         </Grid>
@@ -688,16 +683,13 @@ const Home = () => {
             fullWidth
             text="Get Started"
             link="/contact-us"
+            color="secondary"
             sx={{
-              backgroundColor: '#ee8434',
               boxShadow: 0,
-              height: '70px',
-              fontSize: '22px',
+              height: '4rem',
+              fontSize: '1.2rem',
               marginBottom: '10px',
-              marginTop: '30px',
-              '&:hover': {
-                backgroundColor: 'darkorange'
-              }
+              marginTop: '30px'
             }}
           />
         </Grid>
