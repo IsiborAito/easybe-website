@@ -21,9 +21,7 @@ import { IBar } from './navigation-bar';
 import { services } from '../../utilities/data';
 import IconSwitch from '../../utilities/iconSwitch';
 
-type IMobileBar = Omit<IBar, 'barColor'>;
-
-const MobileMenu = ({ textColor }: IMobileBar) => {
+const MobileMenu = ({ textColor, barColor }: IBar) => {
   const [open, setOpen] = React.useState(false);
   const [serviceOpen, setServiceOpen] = React.useState(false);
 
@@ -39,6 +37,7 @@ const MobileMenu = ({ textColor }: IMobileBar) => {
   const navigate = useNavigate();
 
   const goToLink = (link: string) => {
+    setOpen(false);
     navigate({ to: link, replace: false });
   };
 
@@ -47,34 +46,45 @@ const MobileMenu = ({ textColor }: IMobileBar) => {
   };
 
   const list = () => (
-    <Box sx={{ width: '75%' }} role="presentation" onClick={openDrawer}>
+    <Box sx={{ width: '100%' }} role="presentation">
       <List>
-        <ListItemButton onClick={() => goToLink('/why-easybe')}>
-          <ListItemText primary={'Why Easybe'} />
+        <ListItemButton onClick={() => goToLink('/why-us')}>
+          <ListItemText primary={'Why Easybe'} sx={{ color: textColor }} />
         </ListItemButton>
         <ListItemButton onClick={toggleService}>
-          <ListItemText primary={'Services'} />
+          <ListItemText primary={'Services'} sx={{ color: textColor }} />
           <ListItemIcon>
-            {serviceOpen ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+            {serviceOpen ? (
+              <ExpandLessIcon sx={{ color: textColor }} />
+            ) : (
+              <ExpandMoreIcon sx={{ color: textColor }} />
+            )}
           </ListItemIcon>
         </ListItemButton>
         <Collapse in={serviceOpen} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
             {services.map((service) => (
-              <ListItemButton key={service.service} sx={{ pl: 4 }}>
+              <ListItemButton
+                key={service.service}
+                sx={{ pl: 4 }}
+                onClick={() => goToLink(service.link)}
+              >
                 <ListItemIcon>
-                  <IconSwitch iconName={service.service} />
+                  <IconSwitch iconName={service.service} color={textColor} />
                 </ListItemIcon>
-                <ListItemText sx={{ flexGrow: 1 }} primary={service.service} />
+                <ListItemText
+                  sx={{ flexGrow: 1, color: textColor }}
+                  primary={service.service}
+                />
               </ListItemButton>
             ))}
           </List>
         </Collapse>
         <ListItemButton onClick={() => goToLink('/clients')}>
-          <ListItemText primary="Clients" />
+          <ListItemText primary="Clients" sx={{ color: textColor }} />
         </ListItemButton>
         <ListItemButton onClick={() => goToLink('/about-us')}>
-          <ListItemText primary="About Us" />
+          <ListItemText primary="About Us" sx={{ color: textColor }} />
         </ListItemButton>
       </List>
       <Button
@@ -82,6 +92,7 @@ const MobileMenu = ({ textColor }: IMobileBar) => {
         variant="contained"
         disableElevation
         sx={{ ml: 2 }}
+        onClick={() => goToLink('/contact-us')}
       >
         Get Started
       </Button>
@@ -127,7 +138,10 @@ const MobileMenu = ({ textColor }: IMobileBar) => {
         variant="persistent"
         anchor="top"
         open={open}
-        PaperProps={{ sx: { marginTop: '64px', pb: '2rem' } }}
+        onClose={closeDrawer}
+        PaperProps={{
+          sx: { marginTop: '64px', pb: '2rem', backgroundColor: barColor }
+        }}
       >
         {list()}
       </Drawer>

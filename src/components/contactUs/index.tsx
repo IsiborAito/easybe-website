@@ -52,19 +52,21 @@ const Contact = () => {
     <div
       style={{
         width: '100%',
-        height: isMobile ? 'auto' : '80vh',
+        height: isMobile ? 'auto' : '90vh',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'flex-start',
         position: 'relative',
         gap: '8rem',
-        marginTop: isMobile ? '4rem' : '2rem'
+        marginTop: isMobile ? '0rem' : '2rem',
+        paddingTop: '4rem'
       }}
     >
       <div
         style={{
           backgroundColor: '#122C34',
-          padding: isMobile ? '2rem' : '8rem',
+          padding: isMobile ? '2rem' : '2rem',
+          height: '100%',
           overflow: 'hidden'
         }}
       >
@@ -74,22 +76,21 @@ const Contact = () => {
           alignItems="flex-start"
           spacing={1}
         >
-          <Grid item md={4} sm={4}>
-            <Stack>
+          <Grid item md={3} sm={4}>
+            <Stack spacing={1}>
               <Typography
-                variant="h1"
+                variant="h3"
                 sx={{
                   fontWeight: 700,
-                  color: 'white',
-                  fontSize: { sm: '42px', md: '64px' }
+                  color: 'white'
                 }}
               >
                 Start a project
               </Typography>
               <Typography
-                variant="h4"
+                variant="h5"
                 sx={{
-                  fontWeight: 400,
+                  fontWeight: 300,
                   color: 'white',
                   fontSize: { sm: '30px' }
                 }}
@@ -100,13 +101,13 @@ const Contact = () => {
               </Typography>
             </Stack>
           </Grid>
-          <Grid item md={6} sm={8}>
+          <Grid item md={9} sm={8}>
             <Card
               sx={{
                 padding: { lg: '2rem', sm: '1rem', xs: '0.5rem' },
                 position: isMobile ? 'relative' : 'absolute',
                 right: isMobile ? '0%' : '5%',
-                left: isMobile ? '0%' : { lg: '60%', sm: '40%' }
+                left: isMobile ? '0%' : { lg: '30%', sm: '40%', md: '30%' }
               }}
               raised
             >

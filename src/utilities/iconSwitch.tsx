@@ -13,27 +13,28 @@ import {
 
 interface IconSwitchProps {
   iconName: string;
+  color: string;
 }
 
-const IconSwitch: React.FC<IconSwitchProps> = ({ iconName }) => {
+const IconSwitch: React.FC<IconSwitchProps> = ({ iconName, color }) => {
   const getIcon = (name: string) => {
     switch (name) {
       case 'Software development':
-        return <Computer />;
+        return <Computer sx={{ color: color }} />;
       case 'Mobile app development':
-        return <AppShortcut />;
+        return <AppShortcut sx={{ color: color }} />;
       case 'Web app development':
-        return <Web />;
+        return <Web sx={{ color: color }} />;
       case 'Software maintenance':
-        return <Build />;
+        return <Build sx={{ color: color }} />;
       case 'Staff augmentation':
-        return <Person />;
+        return <Person sx={{ color: color }} />;
       case 'Hire development teams':
-        return <Group />;
+        return <Group sx={{ color: color }} />;
       case 'Cybersecurity consultancy':
-        return <Security />;
+        return <Security sx={{ color: color }} />;
       case 'Quality assurance testing':
-        return <BugReport />;
+        return <BugReport sx={{ color: color }} />;
       default:
         return null;
     }

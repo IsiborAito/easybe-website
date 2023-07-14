@@ -18,7 +18,6 @@ function AboutUs() {
 
   var settings = {
     className: 'center',
-    centerMode: true,
     infinite: true,
     // centerPadding: '60px',
     slidesToShow: 3,
@@ -28,18 +27,25 @@ function AboutUs() {
     cssEase: 'linear',
     responsive: [
       {
-        breakpoint: 1024,
+        breakpoint: 1420,
         settings: {
           slidesToShow: 3,
           slidesToScroll: 1,
-          centerMode: true,
+          centerPadding: '60px'
+        }
+      },
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
           centerPadding: '60px'
         }
       },
       {
         breakpoint: 780,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 2,
           slidesToScroll: 1,
           initialSlide: 1
         }
@@ -65,7 +71,7 @@ function AboutUs() {
       >
         <Grid item md={4} sm={12} xs={12}>
           <Stack>
-            <Typography variant="h2" fontWeight={'700'}>
+            <Typography variant="h3" fontWeight={'700'}>
               Easybe: Making <br />
               business easy
             </Typography>
@@ -87,9 +93,8 @@ function AboutUs() {
               variant="contained"
               sx={{
                 boxShadow: 0,
-                height: '4rem',
+                height: '3rem',
                 width: { md: '40%', sm: '100%' },
-                fontSize: '20px',
                 marginBottom: '10px',
                 marginTop: '30px'
               }}
@@ -127,7 +132,7 @@ function AboutUs() {
           sx={{ order: { md: 2, sm: 1, xs: 1 } }}
         >
           <Stack>
-            <Typography variant="h2" fontWeight={'700'}>
+            <Typography variant="h3" fontWeight={'700'}>
               What we do
             </Typography>
             <Typography variant="h5" fontWeight={300}>
@@ -158,7 +163,7 @@ function AboutUs() {
           sx={{ order: { md: 5, sm: 6, xs: 6 } }}
         >
           <Stack>
-            <Typography align="center" variant="h2" fontWeight={'700'}>
+            <Typography align="center" variant="h3" fontWeight={'700'}>
               What sets us apart
             </Typography>
             <Typography align="center" variant="h5" fontWeight={300}>
@@ -230,14 +235,18 @@ function AboutUs() {
                 >
                   <img
                     src={data.image}
-                    height={'20%'}
+                    height={'200px'}
                     width={'100%'}
                     alt=""
                     style={{ objectFit: 'contain' }}
                   />
                 </Box>
                 <Box
-                  sx={{ width: '80%', height: 'fit-content', padding: '1rem' }}
+                  sx={{
+                    width: '100%',
+                    height: 'fit-content',
+                    padding: '0.5rem'
+                  }}
                 >
                   <Typography
                     variant="h5"
@@ -278,7 +287,7 @@ function AboutUs() {
       >
         <Grid item md={12} sm={12} xs={12}>
           <Typography
-            variant="h2"
+            variant="h3"
             align={isMobile ? 'center' : 'left'}
             fontWeight={700}
           >
@@ -308,7 +317,7 @@ function AboutUs() {
         >
           <Grid item md={5} sm={10} xs={12}>
             <Stack direction="row" spacing={1} alignItems="center">
-              <MessageIcon sx={{ fontSize: '50px' }} />
+              <MessageIcon sx={{ fontSize: '2rem' }} />
               <Typography variant="h5" fontWeight={300}>
                 To get started with your software development project, simply
                 reach out to Easybe and we'll schedule a consultation to discuss
@@ -318,7 +327,7 @@ function AboutUs() {
           </Grid>
           <Grid item md={5} xs={12} sm={10}>
             <Stack direction="row" spacing={1} alignItems="center">
-              <GroupIcon sx={{ fontSize: '50px' }} />
+              <GroupIcon sx={{ fontSize: '2rem' }} />
               <Typography variant="h5" fontWeight={300}>
                 After agreeing on the project requirements and scope, we'll
                 introduce our team of skilled and experienced developers,
@@ -333,7 +342,7 @@ function AboutUs() {
           </Grid>
           <Grid item md={5} xs={12} sm={10}>
             <Stack direction="row" spacing={1} alignItems="center">
-              <GroupWorkIcon sx={{ fontSize: '50px' }} />
+              <GroupWorkIcon sx={{ fontSize: '2rem' }} />
               <Typography variant="h5" fontWeight={300}>
                 We'll collaborate closely with you to bring your ideas to life
                 and develop a custom software solution tailored to your specific
@@ -343,7 +352,7 @@ function AboutUs() {
           </Grid>
           <Grid item md={5} xs={12} sm={10}>
             <Stack direction="row" spacing={1} alignItems="center">
-              <AccessTimeFilledIcon sx={{ fontSize: '50px' }} />
+              <AccessTimeFilledIcon sx={{ fontSize: '2rem' }} />
               <Typography variant="h5" fontWeight={300}>
                 Once your project is completed, we'll deploy it to your
                 preferred platform and provide ongoing maintenance and support
@@ -351,20 +360,19 @@ function AboutUs() {
               </Typography>
             </Stack>
           </Grid>
-        </Grid>
-        <Grid item md={12} sm={12} xs={12} pt={isMobile ? '20px' : '100px'}>
-          <LinkButton
-            variant="contained"
-            text="Contact us"
-            link="/contact-us"
-            color="secondary"
-            sx={{
-              boxShadow: 0,
-              height: { xs: '50px', sm: '60px', md: '70px', lg: '80px' },
-              width: { sm: '200px', xs: '150px', md: '250px', lg: '300px' },
-              fontSize: { sm: '12px', xs: '10px', md: '18px', lg: '22px' }
-            }}
-          />
+          <Grid item md={12} sm={12} xs={12} pt={'2rem'}>
+            <LinkButton
+              variant="contained"
+              text="Contact us"
+              link="/contact-us"
+              color="secondary"
+              disableElevation
+              sx={{
+                height: '3rem',
+                width: { sm: '100%', xs: '100%', md: '50%', lg: '50%' }
+              }}
+            />
+          </Grid>
         </Grid>
       </Grid>
     </>

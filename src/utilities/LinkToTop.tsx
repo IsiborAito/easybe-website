@@ -1,26 +1,16 @@
-import { MouseEventHandler, ReactNode } from 'react';
-import { Link, useNavigate } from '@tanstack/react-location';
+import React from 'react';
+import { DefaultGenerics, ReactLocation } from '@tanstack/react-location';
 
 interface Props {
-  children: ReactNode;
-  className?: string;
-  to: string;
+  location: ReactLocation<DefaultGenerics>;
 }
 
-const useNavigateToTop = (props: Props) => {
-  const navigate = useNavigate();
-
-  const navigateAndReset: MouseEventHandler<HTMLAnchorElement> = (event) => {
-    event.preventDefault();
-    navigate({ to: props.to, replace: false });
+const LinkToTop = ({ location }: Props) => {
+  React.useEffect(() => {
     window.scrollTo(0, 0);
-  };
+  }, [location.current.pathname]);
 
-  return (
-    <Link className={props.className} onClick={navigateAndReset} to={props.to}>
-      {props.children}
-    </Link>
-  );
+  return null;
 };
 
-export default useNavigateToTop;
+export default LinkToTop;

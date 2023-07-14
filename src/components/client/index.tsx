@@ -16,15 +16,14 @@ const ClientPage = () => {
         justifyContent="space-around"
         alignItems="flex-start"
         spacing={isMobile ? 4 : 10}
-        sx={{ paddingLeft: '3rem', paddingRight: '3rem' }}
+        sx={{ paddingLeft: '2rem', paddingRight: '2rem' }}
       >
         <Grid item md={4} sm={12}>
-          <Stack spacing={3}>
+          <Stack spacing={2}>
             <Typography
               variant={'h6'}
               sx={{
-                fontWeight: 700,
-                fontSize: { sm: '16px', xs: '12px', md: '24px' }
+                fontWeight: 700
               }}
             >
               Welcome to
@@ -32,8 +31,7 @@ const ClientPage = () => {
             <Typography
               variant="h2"
               sx={{
-                fontWeight: 700,
-                fontSize: { sm: '32px', xs: '24px', md: '64px' }
+                fontWeight: 700
               }}
             >
               Our Clients page
@@ -41,17 +39,15 @@ const ClientPage = () => {
             <Typography
               variant="h5"
               sx={{
-                fontWeight: 700,
-                fontSize: { sm: '24px', xs: '14px', md: '36px' }
+                fontWeight: 700
               }}
             >
               On this page you will find
             </Typography>
             <Typography
-              variant="h4"
+              variant="h6"
               sx={{
-                fontWeight: 400,
-                fontSize: { sm: '18px', xs: '16px', md: '32px' }
+                fontWeight: 400
               }}
             >
               inspiring case studies that highlight our expertise in various
@@ -69,7 +65,7 @@ const ClientPage = () => {
               disableElevation
               sx={{
                 textTransform: 'none',
-                width: '50%',
+                width: { lg: '50%', md: '50%', sm: '100%', xs: '100%' },
                 height: '3rem',
                 fontSize: '1.25rem',
                 backgroundColor: '#EE8434',
@@ -80,16 +76,16 @@ const ClientPage = () => {
             />
           </Stack>
         </Grid>
-        <Grid item md={3}>
+        <Grid item md={3} sm={12} xs={12}>
           <Box
-            sx={{ width: '600px', height: '600px', backgroundColor: 'gray' }}
+            sx={{ width: '100%', height: '600px', backgroundColor: 'gray' }}
           />
         </Grid>
         <Grid item md={12}>
           <div style={{ height: '60px' }} />
         </Grid>
       </Grid>
-      <Box sx={{ backgroundColor: '#122C34', marginTop: '4rem', p: '8rem' }}>
+      <Box sx={{ backgroundColor: '#122C34', marginTop: '4rem', p: '4rem' }}>
         <ClientSide />
       </Box>
       <Box sx={{ height: '120px' }} />

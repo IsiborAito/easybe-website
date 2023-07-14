@@ -20,12 +20,12 @@ const WhyUs = () => {
         sx={{ padding: isMobile ? '3rem' : '8rem' }}
         spacing={10}
       >
-        <Grid item md={12}>
+        <Grid item md={12} sx={{ order: { sm: 1, xs: 1 } }}>
           <Stack justifyContent="space-between" spacing={1}>
-            <Typography variant="h3" fontWeight="700">
+            <Typography variant="h4" fontWeight="700">
               At Easybe
             </Typography>
-            <Typography variant="h4" gutterBottom fontWeight="300">
+            <Typography variant="h5" gutterBottom fontWeight="300">
               We understand that choosing the right software development company{' '}
               <br />
               is a critical decision for your business. That's why we want to
@@ -35,44 +35,46 @@ const WhyUs = () => {
             </Typography>
           </Stack>
         </Grid>
-        <Grid item md={5} sm={12}>
+        <Grid item md={5} sm={12} xs={12} sx={{ order: { sm: 2, xs: 2 } }}>
           <Box
             sx={{
-              height: '620px',
-              width: '620px',
+              height: '30rem',
+              width: '100%',
               backgroundColor: 'cornflowerblue'
             }}
           />
         </Grid>
-        <Grid item md={5} sm={12}>
+        <Grid item md={5} sm={12} xs={12} sx={{ order: { sm: 4, xs: 4 } }}>
           <Box
             sx={{
-              height: '620px',
-              width: '620px',
+              height: '30rem',
+              width: '100%',
               backgroundColor: 'cornflowerblue'
             }}
           />
         </Grid>
-        <Grid item md={5} sm={12}>
-          <Typography variant="h3" fontWeight="700">
-            Tailored Solutions for Your Unique Needs <br />
+        <Grid item md={5} sm={12} sx={{ order: { sm: 3, xs: 3 } }}>
+          <Typography variant="h4" fontWeight="700">
+            Tailored solutions for your Unique Needs <br />
             We believe that one size does not fit all. Our custom software
             solutions are designed to address your unique challenges and help
             you achieve your objectives efficiently and effectively.
           </Typography>
         </Grid>
-        <Grid item md={5} sm={12}>
+        <Grid item md={5} sm={12} sx={{ order: { sm: 5, xs: 5 } }}>
           <Stack justifyContent={'space-between'} spacing={2}>
-            <Typography variant="h5" fontWeight="300">
-              Quality and Reliability <br />
+            <Typography variant="h6" fontWeight="300" gutterBottom>
+              <strong>Quality and Reliability</strong>
+              <br />
               We are committed to delivering software solutions of the highest
               quality. <br />
               Our rigorous development processes and quality assurance standards
               ensure that our deliverables meet the highest industry standards.
             </Typography>
-            <Typography variant="h5" fontWeight="300">
-              Choosing Easybe as your custom software development partner means
-              choosing a team that is dedicated to your success. <br />
+            <Typography variant="h6" fontWeight="300" gutterBottom>
+              <strong>Choosing Easybe</strong> as your custom software
+              development partner means choosing a team that is dedicated to
+              your success. <br />
               We are passionate about helping businesses like yours thrive in
               the digital landscape through innovative software solutions. Let
               us be your partner on this exciting journey.
@@ -95,13 +97,13 @@ const WhyUs = () => {
         >
           <Grid item md={12} sm={12}>
             <Stack>
-              <Typography variant="h5" fontWeight="700" color="white">
+              <Typography variant="h6" fontWeight="700" color="white">
                 EASYBE
               </Typography>
-              <Typography variant="h3" fontWeight="700" color="white">
+              <Typography variant="h4" fontWeight="700" color="white">
                 Our values and principles
               </Typography>
-              <Typography variant="h4" fontWeight="300" color="white">
+              <Typography variant="h5" fontWeight="300" color="white">
                 Building business solutions at Easybe <br />
                 are driven by these values and principles
               </Typography>
@@ -131,11 +133,11 @@ const WhyUs = () => {
                     fontSize="large"
                     sx={{ color: 'white' }}
                   />
-                  <Typography variant="h4" fontWeight="700" color="white">
+                  <Typography variant="h5" fontWeight="700" color="white">
                     Customer focus
                   </Typography>
                 </Stack>
-                <Typography variant="h4" fontWeight="300" color="white">
+                <Typography variant="h5" fontWeight="300" color="white">
                   We prioritize our customers and their needs above everything
                   else.
                 </Typography>
@@ -151,11 +153,11 @@ const WhyUs = () => {
                   spacing={1}
                 >
                   <GroupWorkIcon fontSize="large" sx={{ color: 'white' }} />
-                  <Typography variant="h4" fontWeight="700" color="white">
+                  <Typography variant="h5" fontWeight="700" color="white">
                     Teamwork
                   </Typography>
                 </Stack>
-                <Typography variant="h4" fontWeight="300" color="white">
+                <Typography variant="h5" fontWeight="300" color="white">
                   We encourage open communication, mutual respect, and a
                   positive attitude towards one another.
                 </Typography>
@@ -170,11 +172,11 @@ const WhyUs = () => {
                   spacing={1}
                 >
                   <TrendingUpIcon fontSize="large" sx={{ color: 'white' }} />
-                  <Typography variant="h4" fontWeight="700" color="white">
+                  <Typography variant="h5" fontWeight="700" color="white">
                     Continuous Improvement
                   </Typography>
                 </Stack>
-                <Typography variant="h4" fontWeight="300" color="white">
+                <Typography variant="h5" fontWeight="300" color="white">
                   We are committed to ongoing learning and development, and we
                   continuously seek to improve our skills, processes, and
                   services.
@@ -191,11 +193,11 @@ const WhyUs = () => {
                   spacing={1}
                 >
                   <CheckCircleIcon fontSize="large" sx={{ color: 'white' }} />
-                  <Typography variant="h4" fontWeight="700" color="white">
+                  <Typography variant="h5" fontWeight="700" color="white">
                     Quality
                   </Typography>
                 </Stack>
-                <Typography variant="h4" fontWeight="300" color="white">
+                <Typography variant="h5" fontWeight="300" color="white">
                   We are committed to delivering high-quality software solutions
                   that are reliable, scalable, and secure.
                 </Typography>

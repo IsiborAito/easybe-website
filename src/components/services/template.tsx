@@ -38,23 +38,23 @@ const Template = ({
         p={'4rem'}
         spacing={2}
       >
-        <Grid item md={4} sm={12}>
+        <Grid item md={4} sm={12} xs={12}>
           <Box
             sx={{
               height: '600px',
-              width: '600px',
+              width: '100%',
               backgroundColor: 'yellow'
             }}
           >
             First Image
           </Box>
         </Grid>
-        <Grid item md={4} sm={12}>
+        <Grid item md={4} sm={12} xs={12}>
           <Stack spacing={2}>
-            <Typography variant="h2" fontWeight={700} gutterBottom>
+            <Typography variant="h3" fontWeight={700} gutterBottom>
               {firstTitle}
             </Typography>
-            <Typography variant="h5" fontWeight={300} gutterBottom>
+            <Typography variant="h6" fontWeight={300} gutterBottom>
               {firstDesc}
             </Typography>
             <LinkButton
@@ -65,8 +65,8 @@ const Template = ({
               disableElevation
               sx={{
                 backgroundColor: '#EE8434',
-                width: '50%',
-                height: '4rem',
+                width: { md: '50%', lg: '50%', sm: '100%', xs: '100%' },
+                height: '3rem',
                 '&:hover': {
                   backgroundColor: 'orange'
                 }
@@ -74,7 +74,7 @@ const Template = ({
             />
           </Stack>
         </Grid>
-        <Grid item md={12}>
+        <Grid item md={12} xs={12}>
           <div style={{ height: '80px' }} />
         </Grid>
       </Grid>
@@ -94,10 +94,10 @@ const Template = ({
           alignItems="center"
           spacing={3}
         >
-          <Grid item md={4} sm={12}>
+          <Grid item md={4} sm={12} xs={12}>
             <Stack spacing={1}>
               <Typography
-                variant="h3"
+                variant="h4"
                 fontWeight={700}
                 gutterBottom
                 color="primary.contrastText"
@@ -105,7 +105,7 @@ const Template = ({
                 {secondTitle}
               </Typography>
               <Typography
-                variant="h5"
+                variant="h6"
                 fontWeight={300}
                 gutterBottom
                 color="primary.contrastText"
@@ -121,16 +121,16 @@ const Template = ({
                 icon={<ArrowForwardIcon />}
                 disableElevation
                 sx={{
-                  width: '50%',
-                  height: '4rem'
+                  height: '3rem',
+                  width: { md: '50%', lg: '50%', sm: '100%', xs: '100%' }
                 }}
               />
             </Stack>
           </Grid>
-          <Grid item md={4} sm={12}>
+          <Grid item md={4} sm={12} xs={12}>
             <Box
               sx={{
-                width: '600px',
+                width: '100%',
                 height: '600px',
                 backgroundColor: '#D9D9D9'
               }}
@@ -150,12 +150,12 @@ const Template = ({
         pl={isMobile ? '3rem' : '0'}
         pr={isMobile ? '3rem' : '0'}
       >
-        <Grid item md={4}>
+        <Grid item md={4} sm={12} xs={12}>
           <Stack spacing={2}>
-            <Typography variant="h3" fontWeight={700} gutterBottom>
+            <Typography variant="h4" fontWeight={700} gutterBottom>
               {thirdTitle}
             </Typography>
-            <Typography variant="h5" fontWeight={300} gutterBottom>
+            <Typography variant="h6" fontWeight={300} gutterBottom>
               {thirdDesc}
             </Typography>
             <LinkButton
@@ -165,9 +165,9 @@ const Template = ({
               variant="contained"
               disableElevation
               sx={{
+                width: { md: '50%', lg: '50%', sm: '100%', xs: '100%' },
                 backgroundColor: '#EE8434',
-                width: '50%',
-                height: '4rem',
+                height: '3rem',
                 '&:hover': {
                   backgroundColor: 'orange'
                 }
@@ -175,10 +175,10 @@ const Template = ({
             />
           </Stack>
         </Grid>
-        <Grid item md={4}>
+        <Grid item md={4} sm={12} xs={12}>
           <Box
             sx={{
-              width: '600px',
+              width: '100%',
               height: '600px',
               backgroundColor: '#D9D9D9'
             }}

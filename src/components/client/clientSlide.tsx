@@ -13,7 +13,6 @@ const ClientSide = () => {
 
   var settings = {
     className: 'center',
-    centerMode: true,
     infinite: true,
     // centerPadding: '60px',
     slidesToShow: 1,
@@ -50,7 +49,7 @@ const ClientSide = () => {
   };
 
   return (
-    <Grid container justifyContent="space-around" alignItems="center">
+    <Grid container justifyContent="center" alignItems="center">
       <Grid
         item
         md={1}
@@ -80,16 +79,16 @@ const ClientSide = () => {
                 justifyContent={'space-around'}
                 alignItems="center"
               >
-                <Grid item md={5} sm={12}>
+                <Grid item md={5} sm={12} xs={12}>
                   <Box
                     sx={{
-                      width: '500px',
+                      width: '100%',
                       height: '500px',
                       backgroundColor: 'gray'
                     }}
                   />
                 </Grid>
-                <Grid item md={5} sm={12}>
+                <Grid item md={5} sm={12} xs={12}>
                   <Stack spacing={2}>
                     <Typography variant="h3" color="primary.contrastText">
                       {client.title}

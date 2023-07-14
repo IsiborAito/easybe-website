@@ -166,7 +166,7 @@ const NavigationBar = ({ barColor, textColor }: IBar) => {
                   sx={{ flexBasis: '50%' }}
                 >
                   <ListItemIcon>
-                    <IconSwitch iconName={service} />
+                    <IconSwitch iconName={service} color={'#000'} />
                   </ListItemIcon>
                   <ListItemText>{service}</ListItemText>
                 </MenuItem>
@@ -201,7 +201,11 @@ const NavigationBar = ({ barColor, textColor }: IBar) => {
     <ElevationScroll>
       <AppBar sx={{ backgroundColor: barColor }}>
         <StyledToolbar>
-          {isMobile ? <MobileMenu textColor={textColor} /> : regularAppBar()}
+          {isMobile ? (
+            <MobileMenu textColor={textColor} barColor={barColor} />
+          ) : (
+            regularAppBar()
+          )}
         </StyledToolbar>
       </AppBar>
     </ElevationScroll>

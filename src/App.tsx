@@ -14,6 +14,7 @@ import { ThemeProvider, useTheme } from '@mui/material/styles';
 import { EasyBeContext } from './utilities/context';
 import { useMediaQuery } from '@mui/material';
 import { ServiceData } from './utilities/data';
+import LinkToTop from './utilities/LinkToTop';
 
 const location = new ReactLocation({});
 
@@ -25,6 +26,7 @@ const routes: Route[] = [
         path: '/',
         element: (
           <Shell>
+            <LinkToTop location={location} />
             <Home />
           </Shell>
         )
@@ -33,6 +35,7 @@ const routes: Route[] = [
         path: '/contact-us',
         element: (
           <Shell>
+            <LinkToTop location={location} />
             <Contact />
           </Shell>
         )
@@ -41,6 +44,7 @@ const routes: Route[] = [
         path: '/clients',
         element: (
           <Shell>
+            <LinkToTop location={location} />
             <ClientPage />
           </Shell>
         )
@@ -49,6 +53,7 @@ const routes: Route[] = [
         path: '/policies',
         element: (
           <Shell>
+            <LinkToTop location={location} />
             <PolicyPage />
           </Shell>
         )
@@ -57,6 +62,7 @@ const routes: Route[] = [
         path: '/about-us',
         element: (
           <Shell>
+            <LinkToTop location={location} />
             <AboutUs />
           </Shell>
         )
@@ -65,6 +71,7 @@ const routes: Route[] = [
         path: '/why-us',
         element: (
           <Shell>
+            <LinkToTop location={location} />
             <WhyUs />
           </Shell>
         )
@@ -76,6 +83,7 @@ const routes: Route[] = [
             path: '/software-development',
             element: (
               <Shell>
+                <LinkToTop location={location} />
                 <Service service={ServiceData.software} />
               </Shell>
             )
@@ -84,6 +92,7 @@ const routes: Route[] = [
             path: '/mobile-development',
             element: (
               <Shell>
+                <LinkToTop location={location} />
                 <Service service={ServiceData.mobile} />
               </Shell>
             )
@@ -92,6 +101,7 @@ const routes: Route[] = [
             path: '/web-development',
             element: (
               <Shell>
+                <LinkToTop location={location} />
                 <Service service={ServiceData.web} />
               </Shell>
             )
@@ -100,6 +110,7 @@ const routes: Route[] = [
             path: '/software-maintenance',
             element: (
               <Shell>
+                <LinkToTop location={location} />
                 <Service service={ServiceData.maintenance} />
               </Shell>
             )
@@ -108,6 +119,7 @@ const routes: Route[] = [
             path: '/staff-augmentation',
             element: (
               <Shell>
+                <LinkToTop location={location} />
                 <Service service={ServiceData.staff} />
               </Shell>
             )
@@ -116,6 +128,7 @@ const routes: Route[] = [
             path: '/hire-development-teams',
             element: (
               <Shell>
+                <LinkToTop location={location} />
                 <Service service={ServiceData.devTeams} />
               </Shell>
             )
@@ -124,6 +137,7 @@ const routes: Route[] = [
             path: '/cybersecurity-consultancy',
             element: (
               <Shell>
+                <LinkToTop location={location} />
                 <Service service={ServiceData.security} />
               </Shell>
             )
@@ -132,6 +146,7 @@ const routes: Route[] = [
             path: '/quality-assurance-testing',
             element: (
               <Shell>
+                <LinkToTop location={location} />
                 <Service service={ServiceData.testing} />
               </Shell>
             )
